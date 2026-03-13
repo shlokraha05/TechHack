@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoM Dashboard | PARIVESH 3.0</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <header class="bg-white px-8 py-4 flex justify-between items-center border-b border-gray-100 sticky top-0 z-50">
+        <div class="flex items-center gap-3">
+            <div class="bg-blue-600 text-white font-bold px-3 py-2 rounded-lg text-xl shadow-md shadow-blue-100">P3</div>
+            <div>
+                <h1 class="font-bold text-gray-800 text-lg leading-none">PARIVESH 3.0</h1>
+                <p class="text-xs text-gray-500 mt-1 uppercase tracking-tighter">Minutes of Meeting Portal</p>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-6">
+            <div class="hidden md:flex items-center gap-3 border-r border-gray-200 pr-6">
+                <div class="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center text-blue-600">
+                    <i class="fa-solid fa-users-gear"></i>
+                </div>
+                <div class="text-left">
+                    <p class="text-sm font-bold text-gray-800 leading-none">MoM Admin</p>
+                    <p class="text-[10px] text-gray-400 font-semibold mt-1 uppercase">MoM Team Member</p>
+                </div>
+            </div>
+            <a href="register.html" class="text-gray-400 hover:text-red-500 transition text-sm font-medium flex items-center gap-2">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-10">
+        
+        <div class="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div>
+                <h2 class="text-3xl font-bold text-gray-900">Project Evaluation</h2>
+                <p class="text-gray-500 mt-1">Review projects and publish Minutes of Meetings</p>
+            </div>
+            
+            <div class="relative w-full md:w-96">
+                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                <input type="text" placeholder="Search projects by name or ID..." 
+                    class="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition bg-white shadow-sm">
+            </div>
+        </div>
+
+        <div class="bg-white rounded-3xl border border-gray-100 shadow-xl shadow-gray-200/50 overflow-hidden">
+            <div class="p-6 border-b border-gray-50 bg-gray-50/30">
+                <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-blue-600"></i>
+                    Pending for MoM Preparation
+                </h3>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-50 text-gray-400 text-xs font-bold uppercase tracking-wider">
+                            <th class="px-8 py-4">Project Information</th>
+                            <th class="px-8 py-4">Sector</th>
+                            <th class="px-8 py-4">Submission Date</th>
+                            <th class="px-8 py-4">Status</th>
+                            <th class="px-8 py-4 text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-50">
+                        <tr class="hover:bg-blue-50/30 transition">
+                            <td class="px-8 py-6">
+                                <div class="font-bold text-gray-900">Green Valley Mining Project</div>
+                                <div class="text-xs text-gray-400 mt-1">ID: P3-2026-0842</div>
+                            </td>
+                            <td class="px-8 py-6">
+                                <span class="bg-blue-50 text-blue-700 text-[10px] font-bold px-2 py-1 rounded uppercase">Mining</span>
+                            </td>
+                            <td class="px-8 py-6 text-sm text-gray-600">Mar 12, 2026</td>
+                            <td class="px-8 py-6">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-yellow-400 animate-pulse"></span>
+                                    <span class="text-sm font-medium text-gray-700">Awaiting MoM</span>
+                                </div>
+                            </td>
+                            <td class="px-8 py-6 text-right">
+                                <button class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-bold text-sm transition transform active:scale-95 shadow-md shadow-blue-100">
+                                    Evaluate
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr class="hover:bg-blue-50/30 transition">
+                            <td class="px-8 py-6">
+                                <div class="font-bold text-gray-900">Coastal Expressway Expansion</div>
+                                <div class="text-xs text-gray-400 mt-1">ID: P3-2026-1105</div>
+                            </td>
+                            <td class="px-8 py-6">
+                                <span class="bg-purple-50 text-purple-700 text-[10px] font-bold px-2 py-1 rounded uppercase">Infrastructure</span>
+                            </td>
+                            <td class="px-8 py-6 text-sm text-gray-600">Mar 10, 2026</td>
+                            <td class="px-8 py-6">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-yellow-400 animate-pulse"></span>
+                                    <span class="text-sm font-medium text-gray-700">Awaiting MoM</span>
+                                </div>
+                            </td>
+                            <td class="px-8 py-6 text-right">
+                                <button class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-bold text-sm transition transform active:scale-95 shadow-md shadow-blue-100">
+                                    Evaluate
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            </div>
+
+        <div class="mt-12">
+            <h4 class="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                <i class="fa-solid fa-circle-check text-green-500"></i> Recently Published
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-bold text-gray-400 uppercase">Total Published</p>
+                        <h4 class="text-2xl font-bold text-gray-900 mt-1">24</h4>
+                    </div>
+                    <div class="text-green-500 bg-green-50 p-3 rounded-xl"><i class="fa-solid fa-file-export"></i></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

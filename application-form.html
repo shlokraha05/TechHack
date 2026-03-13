@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Application Details | PARIVESH 3.0</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <header class="bg-white px-8 py-4 flex justify-between items-center border-b border-gray-100 sticky top-0 z-50">
+        <div class="flex items-center gap-3">
+            <div class="bg-blue-600 text-white font-bold px-3 py-2 rounded-lg text-xl shadow-md shadow-blue-100">P3</div>
+            <div>
+                <h1 class="font-bold text-gray-800 text-lg leading-none">PARIVESH 3.0</h1>
+                <p class="text-xs text-gray-500 mt-1 uppercase tracking-tighter">Proponent Portal</p>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-6">
+            <div class="hidden md:flex items-center gap-3 border-r border-gray-200 pr-6">
+                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="text-left">
+                    <p class="text-sm font-bold text-gray-800 leading-none">priyanjali</p>
+                    <p class="text-[10px] text-gray-400 font-semibold mt-1 uppercase">Project Proponent</p>
+                </div>
+            </div>
+            
+            <a href="signin.html" class="flex items-center gap-2 text-gray-400 hover:text-red-500 transition-colors duration-200">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-10">
+            <div>
+                <h2 class="text-3xl font-bold text-gray-900">My Applications</h2>
+                <p class="text-gray-500 mt-1">Manage and track your clearance applications</p>
+            </div>
+            <a href="#new-form" class="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-700 transition transform active:scale-[0.98] shadow-lg shadow-blue-100 flex items-center gap-2 text-sm">
+                <i class="fa-solid fa-plus text-xs"></i> New Application
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div class="bg-blue-600 p-6 rounded-2xl border border-gray-100 shadow-sm text-white">
+                <div class="flex justify-between items-start mb-4">
+                    <p class="text-blue-100 text-xs font-bold uppercase tracking-wider">Total Applications</p>
+                    <div class="text-blue-100 opacity-80 text-lg"><i class="fa-solid fa-paper-plane"></i></div>
+                </div>
+                <h3 class="text-4xl font-bold">0</h3>
+            </div>
+            </div>
+
+        <section id="new-form" class="scroll-mt-24">
+            <div class="mb-10 flex items-center gap-4">
+                <a href="proponent-dashboard.html" class="w-10 h-10 border border-gray-200 bg-white rounded-lg flex items-center justify-center text-gray-400 hover:text-gray-800 transition">
+                    <i class="fa-solid fa-arrow-left text-sm"></i>
+                </a>
+                <div>
+                    <h3 class="text-3xl font-bold text-gray-900">New Application</h3>
+                    <p class="text-gray-500 mt-1">Create a new environmental clearance application</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl border border-gray-100 p-8 md:p-12 shadow-xl shadow-gray-200/50">
+                
+                <form class="space-y-10">
+                    
+                    <section class="space-y-8">
+                        <div>
+                            <h4 class="text-xl font-bold text-gray-900 mb-1">Project Details</h4>
+                            <p class="text-gray-500 text-sm">Fill in all the required information about your project.</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="md:col-span-2 space-y-2">
+                                <label class="block text-sm font-bold text-gray-700">Project Name *</label>
+                                <input type="text" placeholder="Enter project name" required
+                                    class="w-full px-5 py-3.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition bg-gray-50/50">
+                            </div>
+
+                            <div class="md:col-span-2 space-y-2">
+                                <label class="block text-sm font-bold text-gray-700">Project Description *</label>
+                                <textarea placeholder="Provide a detailed description of your project" rows="6" required
+                                    class="w-full px-5 py-3.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition bg-gray-50/50 resize-none"></textarea>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label class="block text-sm font-bold text-gray-700">Application Category *</label>
+                                <select required class="w-full px-5 py-3.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 outline-none transition bg-white cursor-pointer appearance-none">
+                                    <option>Category A</option>
+                                    <option>Category B</option>
+                                    <option>Category B1</option>
+                                </select>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label class="block text-sm font-semibold text-gray-700">Industry Sector *</label>
+                                <select required class="w-full px-5 py-3.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 outline-none transition bg-white cursor-pointer appearance-none">
+                                    <option>Mining</option>
+                                    <option>Infrastructure</option>
+                                    <option>Industrial Development</option>
+                                </select>
+                            </div>
+
+                            <div class="md:col-span-2 space-y-2">
+                                <label class="block text-sm font-bold text-gray-700">Project Location *</label>
+                                <input type="text" placeholder="City, State" required
+                                    class="w-full px-5 py-3.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition bg-gray-50/50">
+                            </div>
+
+                            <div class="space-y-2">
+                                <label class="block text-sm font-bold text-gray-700">Project Area (in hectares) *</label>
+                                <input type="number" placeholder="Enter area in hectares" required
+                                    class="w-full px-5 py-3.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition bg-gray-50/50">
+                            </div>
+
+                            <div class="space-y-2">
+                                <label class="block text-sm font-semibold text-gray-700">Project Investment (in Crores) *</label>
+                                <input type="number" placeholder="Enter investment amount" required
+                                    class="w-full px-5 py-3.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition bg-gray-50/50">
+                            </div>
+                        </div>
+                    </section>
+
+                    <hr class="border-gray-100">
+
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4">
+                        <button type="button" onclick="history.back()" class="w-full sm:w-auto px-10 py-3.5 text-gray-400 font-bold hover:text-gray-600 transition order-2 sm:order-1 border border-gray-200 rounded-xl hover:bg-gray-50">
+                            Cancel
+                        </button>
+                        <div class="flex gap-4 w-full sm:w-auto order-1 sm:order-2">
+                            <button type="submit" class="flex-1 sm:flex-none px-10 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition transform active:scale-[0.98] shadow-lg shadow-blue-100 flex items-center justify-center gap-3">
+                                <i class="fa-solid fa-floppy-disk text-sm"></i> Create Application
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>

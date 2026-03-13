@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrutiny Dashboard | PARIVESH 3.0</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+    </style>
+</head>
+<body>
+
+    <header class="bg-white px-8 py-4 flex justify-between items-center border-b border-gray-100">
+        <div class="flex items-center gap-3">
+            <div class="bg-blue-600 text-white font-bold px-3 py-2 rounded-lg text-xl">P3</div>
+            <div>
+                <h1 class="font-bold text-gray-800 text-lg leading-none">PARIVESH 3.0</h1>
+                <p class="text-xs text-gray-500 mt-1">Scrutiny Dashboard</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center text-white">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="text-left">
+                    <p class="text-sm font-bold text-gray-800 leading-none">shreyansh shekhar</p>
+                    <p class="text-[10px] text-gray-500">Scrutiny Team</p>
+                </div>
+            </div>
+            <a href="signin.html" class="flex items-center gap-2 text-gray-600 hover:text-red-600 transition text-sm border border-gray-200 px-4 py-2 rounded-lg">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-8 py-10">
+        <div class="mb-10">
+            <h2 class="text-3xl font-bold text-gray-900">Scrutiny Dashboard</h2>
+            <p class="text-gray-500">Review and verify submitted applications</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-purple-600 rounded-2xl p-8 text-white shadow-lg shadow-purple-100 flex justify-between items-center">
+                <div>
+                    <p class="text-purple-100 text-sm mb-1">Pending Review</p>
+                    <h3 class="text-4xl font-bold">0</h3>
+                </div>
+                <i class="fa-solid fa-file-circle-exclamation text-3xl opacity-50"></i>
+            </div>
+
+            <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm flex justify-between items-center">
+                <div>
+                    <p class="text-gray-500 text-sm mb-1">Under Review</p>
+                    <h3 class="text-4xl font-bold text-gray-900">0</h3>
+                </div>
+                <i class="fa-solid fa-clipboard-check text-3xl text-yellow-500 opacity-80"></i>
+            </div>
+
+            <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm flex justify-between items-center">
+                <div>
+                    <p class="text-gray-500 text-sm mb-1">Total Applications</p>
+                    <h3 class="text-4xl font-bold text-gray-900">0</h3>
+                </div>
+                <i class="fa-solid fa-circle-info text-3xl text-gray-300"></i>
+            </div>
+        </div>
+
+        <div class="bg-white border border-gray-100 rounded-2xl p-10 min-h-[400px] flex flex-col items-center justify-center">
+            <h4 class="text-gray-900 font-bold self-start mb-20 absolute top-10 left-10">Applications for Review</h4>
+            <div class="flex flex-col items-center text-gray-300">
+                <i class="fa-solid fa-file-circle-question text-6xl mb-4"></i>
+                <p class="text-gray-400 font-medium">No applications to review</p>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
