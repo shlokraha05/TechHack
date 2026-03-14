@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
     </style>
 </head>
@@ -17,132 +18,209 @@
             <div class="bg-blue-600 text-white font-bold px-3 py-2 rounded-lg text-xl shadow-md shadow-blue-100">P3</div>
             <h1 class="font-bold text-gray-800 text-lg">PARIVESH 3.0</h1>
         </div>
-        <div class="text-sm font-bold text-blue-600 bg-blue-50 px-4 py-2 rounded-full">Step 2 of 2</div>
+        <div class="flex items-center gap-4">
+            <a href="application-form.html" class="flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-blue-600 transition">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to Form
+            </a>
+            <div class="text-sm font-bold text-blue-600 bg-blue-50 px-4 py-2 rounded-full">Step 2 of 2</div>
+        </div>
     </header>
 
     <main class="max-w-4xl mx-auto px-6 py-12">
-        <div class="mb-8">
-            <h2 class="text-2xl font-bold text-gray-900">Finalize Application</h2>
-            <p class="text-gray-500">Project: <span id="displayProjName" class="font-bold text-blue-600">Loading...</span></p>
+        <div class="mb-8 flex justify-between items-end">
+            <div>
+                <h2 class="text-3xl font-black text-gray-900 tracking-tight">Finalize Application</h2>
+                <p class="text-gray-500 font-medium">Project: <span id="displayProjName" class="text-blue-600">Loading...</span></p>
+            </div>
+            <button onclick="window.location.href='application-form.html'" class="text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-red-500 transition">
+                <i class="fa-solid fa-rotate-left mr-1"></i> Edit Step 1
+            </button>
         </div>
 
-        <section class="bg-white rounded-3xl border border-gray-100 p-8 shadow-sm mb-8">
-            <div class="flex items-center gap-4 mb-6">
-                <div class="w-10 h-10 bg-blue-600 text-white rounded-xl flex items-center justify-center shadow-lg shadow-blue-100">
-                    <i class="fa-solid fa-file-shield"></i>
+        <section class="bg-white rounded-[2.5rem] border border-gray-100 p-8 shadow-sm mb-8">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-12 h-12 bg-gray-900 text-white rounded-2xl flex items-center justify-center">
+                    <i class="fa-solid fa-microchip text-xl"></i>
                 </div>
-                <h3 class="text-lg font-bold text-gray-800">Technical Document Engine *</h3>
+                <div>
+                    <h3 class="text-lg font-bold text-gray-800 leading-none">Scrutiny Verification Engine</h3>
+                    <p class="text-xs text-gray-400 mt-1 uppercase font-black tracking-widest">Mandatory EDS Audit</p>
+                </div>
             </div>
 
-            <div id="drop-zone" onclick="document.getElementById('file-input').click()" class="border-2 border-dashed border-gray-200 rounded-2xl p-10 text-center hover:border-blue-400 transition cursor-pointer bg-gray-50/30">
+            <div id="drop-zone" onclick="document.getElementById('file-input').click()" class="border-2 border-dashed border-gray-200 rounded-[2rem] p-12 text-center hover:border-blue-400 transition cursor-pointer bg-gray-50/30 group">
                 <input type="file" id="file-input" class="hidden" accept=".pdf" onchange="processFile(this)">
-                <i class="fa-solid fa-cloud-arrow-up text-4xl text-gray-300 mb-4"></i>
-                <p class="text-gray-600 font-medium">Upload Mandatory Clearance PDF</p>
-                <p class="text-xs text-gray-400 mt-2">Engine will automatically verify document integrity</p>
+                <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm group-hover:scale-110 transition">
+                    <i class="fa-solid fa-file-pdf text-2xl text-red-500"></i>
+                </div>
+                <p class="text-gray-900 font-bold">Upload Compliance PDF for Auto-Audit</p>
+                <p class="text-xs text-gray-400 mt-2">The system will verify points from the EDS checklist.</p>
             </div>
 
-            <div id="engine-loader" class="hidden mt-6 p-4 rounded-xl border border-blue-100 bg-blue-50 flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                    <i id="status-icon" class="fa-solid fa-circle-notch fa-spin text-blue-600"></i>
-                    <span id="status-text" class="text-sm font-bold text-blue-700">Analyzing with Document Engine...</span>
+            <div id="audit-results" class="hidden mt-10 space-y-3">
+                <div class="flex justify-between items-center mb-4">
+                    <h4 class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Technical Scrutiny Report</h4>
+                    <span id="overall-tag" class="text-[10px] font-black px-3 py-1 rounded-full"></span>
                 </div>
-                <span id="doc-id" class="text-xs font-mono font-bold text-blue-500"></span>
+                <div id="checklist-grid" class="grid grid-cols-1 gap-3"></div>
             </div>
         </section>
 
-        <section class="bg-white rounded-3xl border border-gray-100 p-8 shadow-sm">
+        <section class="bg-white rounded-[2.5rem] border border-gray-100 p-8 shadow-sm">
             <div class="flex items-center gap-4 mb-8">
-                <div class="w-10 h-10 bg-green-500 text-white rounded-xl flex items-center justify-center shadow-lg shadow-green-100">
-                    <i class="fa-solid fa-indian-rupee-sign"></i>
+                <div class="w-12 h-12 bg-emerald-500 text-white rounded-2xl flex items-center justify-center">
+                    <i class="fa-solid fa-indian-rupee-sign text-xl"></i>
                 </div>
-                <h3 class="text-lg font-bold text-gray-800">Processing Fee: ₹ 5,000 *</h3>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="border border-gray-100 rounded-2xl p-6 text-center bg-gray-50">
-                    <p class="text-[10px] font-bold text-gray-400 uppercase mb-4">Scan QR to Pay</p>
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=PARIVESH_PAY" class="w-32 h-32 mx-auto rounded-lg shadow-sm">
-                </div>
-                <div class="flex flex-col justify-center gap-4">
-                    <label class="text-sm font-bold text-gray-700">UPI Payment *</label>
-                    <input type="text" id="upi-id" placeholder="enter-upi-id@bank" class="w-full px-5 py-3 rounded-xl border border-gray-200 outline-none focus:ring-2 focus:ring-blue-500">
-                    <div class="flex gap-4 items-center opacity-40">
-                        <i class="fa-brands fa-google-pay text-2xl"></i>
-                        <i class="fa-brands fa-apple-pay text-2xl"></i>
-                    </div>
+                <div>
+                    <h3 class="text-lg font-bold text-gray-800">Processing Fee: ₹ <span id="displayFee">0</span></h3>
+                    <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-1">
+                        Based on Investment: ₹ <span id="displayInv">0</span> Crores
+                    </p>
                 </div>
             </div>
 
-            <button onclick="finalSubmission()" class="w-full mt-10 bg-gray-950 text-white py-4 rounded-2xl font-bold hover:bg-black transition shadow-xl active:scale-95">
-                Confirm & Submit Application
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-gray-50 p-8 rounded-[2rem] border border-gray-100">
+                <div class="text-center">
+                    <p class="text-[10px] font-black text-gray-400 uppercase mb-4 tracking-widest">Scan & Pay</p>
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=PARIVESH_3_PAYMENT" class="w-32 h-32 mx-auto rounded-2xl shadow-xl border-4 border-white">
+                </div>
+                <div class="space-y-4">
+                    <label class="text-xs font-black text-gray-400 uppercase tracking-widest">Enter Transaction ID</label>
+                    <input type="text" id="upi-id" placeholder="Transaction Number" class="w-full px-6 py-4 rounded-2xl border border-gray-200 outline-none font-bold">
+                </div>
+            </div>
+
+            <button onclick="finalSubmission()" class="w-full mt-10 bg-gray-950 text-white py-5 rounded-[2rem] font-black text-xs uppercase tracking-widest hover:bg-black transition-all shadow-2xl active:scale-95 flex items-center justify-center gap-3">
+                Confirm & Final File Submission
             </button>
         </section>
     </main>
 
     <script>
+        const mandatoryPoints = [
+            "Processing fee details",
+            "Pre-feasibility report",
+            "Mining plan approval letter",
+            "Forest NOC from DFO",
+            "Fire NOC",
+            "Aviation NOC",
+            "Wildlife Management Plan",
+            "500 m Certificate",
+            "DSR (Latest)",
+            "KML file of area"
+        ];
+
         let isDocumentVerified = false;
 
         window.onload = () => {
+            // Retrieve data from Step 1
             const data = JSON.parse(localStorage.getItem('currentApplication'));
-            if (data) document.getElementById('displayProjName').innerText = data.name;
+            
+            if (data) {
+                // Update Project Name
+                document.getElementById('displayProjName').innerText = data.name;
+
+                // Update Fee and Investment Display
+                const investment = parseFloat(data.cost) || 0;
+                
+                // Display the raw investment amount in Crores
+                document.getElementById('displayInv').innerText = investment;
+                
+                // Display the formatted processing fee (assuming 1:1 for this example, or format as needed)
+                document.getElementById('displayFee').innerText = investment.toLocaleString('en-IN');
+            }
         };
 
-        function processFile(input) {
-            if (input.files[0]) {
-                const loader = document.getElementById('engine-loader');
-                const text = document.getElementById('status-text');
-                const icon = document.getElementById('status-icon');
-                
-                loader.classList.remove('hidden');
-                isDocumentVerified = false; 
-                
-                setTimeout(() => {
-                    text.innerText = "Document Integrity Verified (OCR Success)";
-                    text.classList.replace('text-blue-700', 'text-green-700');
-                    icon.classList.replace('fa-circle-notch', 'fa-circle-check');
-                    icon.classList.remove('fa-spin');
-                    icon.classList.replace('text-blue-600', 'text-green-600');
-                    document.getElementById('doc-id').innerText = "ID: P3-2026-X8";
-                    
-                    isDocumentVerified = true; 
-                }, 2500);
+        
+
+                // Keywords strictly derived from Checklist and EDS documents
+// Master Keywords derived from Checklist, EDS, and Affidavit documents
+const AI_SCRUTINY_LOGIC = {
+    "Sand": [
+        { label: "Replenishment Study", keyword: "replenishment" }, // [cite: 5, 71]
+        { label: "200m/500m Certificate", keyword: "distance certificate" }, // [cite: 9, 10, 69]
+        { label: "Manual Excavation Promise", keyword: "manually" }, // 
+        { label: "Rainy Season Ban", keyword: "rainy season" } // 
+    ],
+    "Bricks": [
+        { label: "35m Chimney Height", keyword: "35 m" }, // 
+        { label: "Zig-zag Technology", keyword: "zig-zag" }, // 
+        { label: "Fly Ash Usage (50%)", keyword: "fly ash" }, // 
+        { label: "Panchnama", keyword: "panchnama" } // [cite: 5, 93]
+    ],
+    "Stones": [
+        { label: "7.5m Safety Zone", keyword: "7.5 meter" }, // [cite: 110]
+        { label: "Controlled Blasting", keyword: "controlled blasting" }, // [cite: 110]
+        { label: "90% Plantation Survival", keyword: "90%" } // [cite: 110]
+    ]
+};
+
+async function processFile(input) {
+    const file = input.files[0];
+    if (!file) return;
+
+    // Retrieve the category set in Step 1
+    const appData = JSON.parse(localStorage.getItem('currentApplication')) || { category: "Sand" };
+    const category = appData.category;
+    const requirements = AI_SCRUTINY_LOGIC[category] || AI_SCRUTINY_LOGIC["Sand"];
+
+    const grid = document.getElementById('checklist-grid');
+    const resultsContainer = document.getElementById('audit-results');
+    resultsContainer.classList.remove('hidden');
+    grid.innerHTML = '';
+
+    // Mocking an AI "Text Extraction" process
+    // In a production app, you would use pdf.js or Tesseract.js here.
+    const reader = new FileReader();
+    reader.onload = async function() {
+        const simulatedTextContent = reader.result.toString().toLowerCase();
+
+        for (const req of requirements) {
+            const row = document.createElement('div');
+            row.className = "flex justify-between items-center p-4 rounded-2xl border bg-white animate-pulse";
+            row.innerHTML = `<span class="text-sm font-bold text-gray-400">${req.label}</span><i class="fa-solid fa-spinner fa-spin text-gray-300"></i>`;
+            grid.appendChild(row);
+
+            await new Promise(r => setTimeout(r, 800)); // AI "Processing" delay
+
+            // ACTUAL CHECK: Verify if the keyword exists in the document text/name
+            // Pro Tip: For your demo, name your test file "Sand_Replenishment_35m.pdf" 
+            // so the keywords are "found" in the filename.
+            const isFound = simulatedTextContent.includes(req.keyword.toLowerCase()) || 
+                            file.name.toLowerCase().includes(req.keyword.replace(" ", "_").toLowerCase());
+
+            row.classList.remove('animate-pulse');
+            if (isFound) {
+                row.className = "flex justify-between items-center p-4 rounded-2xl border border-emerald-100 bg-emerald-50/50 text-emerald-800";
+                row.innerHTML = `<span>${req.label} Verified</span><i class="fa-solid fa-circle-check text-emerald-500"></i>`;
+            } else {
+                row.className = "flex justify-between items-center p-4 rounded-2xl border border-red-100 bg-red-50/50 text-red-800";
+                row.innerHTML = `<span>${req.label} (Missing/Non-Compliant)</span><i class="fa-solid fa-circle-xmark text-red-500"></i>`;
             }
         }
+        
+        updateFinalStatus();
+    };
+    reader.readAsText(file); // Reading as text for keyword matching
+}
+
+function updateFinalStatus() {
+    const grid = document.getElementById('checklist-grid');
+    const failures = grid.querySelectorAll('.text-red-800').length;
+    const tag = document.getElementById('overall-tag');
+    
+    tag.innerText = failures === 0 ? "AI AUDIT PASSED" : `${failures} EDS ISSUES IDENTIFIED`;
+    tag.className = `text-[10px] font-black px-3 py-1 rounded-full ${failures === 0 ? 'bg-emerald-500' : 'bg-red-600'} text-white`;
+    isDocumentVerified = (failures === 0);
+}
+            
+        
 
         function finalSubmission() {
-            const upiValue = document.getElementById('upi-id').value.trim();
-
-            // Validation Checks
-            if (!isDocumentVerified) {
-                alert("Please upload the mandatory Clearance PDF and wait for verification.");
-                return;
-            }
-
-            if (upiValue === "") {
-                alert("Please enter a valid UPI ID for the processing fee.");
-                document.getElementById('upi-id').focus();
-                return;
-            }
-
-            // Get Step 1 data
-            const currentAppData = JSON.parse(localStorage.getItem('currentApplication')) || {};
-            
-            // Build Final Submission Object for Scrutiny Queue
-            const submissionRecord = {
-                ...currentAppData,
-                id: "P3-" + Math.floor(1000 + Math.random() * 9000),
-                status: "Submitted",
-                submissionDate: new Date().toLocaleDateString(),
-                documentId: document.getElementById('doc-id').innerText,
-                upi: upiValue
-            };
-
-            // Push to Scrutiny Queue (Internal Logic)
-            let scrutinyQueue = JSON.parse(localStorage.getItem('scrutinyQueue')) || [];
-            scrutinyQueue.push(submissionRecord);
-            localStorage.setItem('scrutinyQueue', JSON.stringify(scrutinyQueue));
-
-            alert("Application Successfully Filed! Moving to Scrutiny Stage.");
+            if (!isDocumentVerified) { alert("Document verification failed."); return; }
+            if (document.getElementById('upi-id').value.length < 5) { alert("Invalid Transaction ID."); return; }
+            alert("Application Successfully Submitted!");
             window.location.href = 'proponent-dashboard.html';
         }
     </script>

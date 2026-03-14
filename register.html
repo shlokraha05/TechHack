@@ -32,7 +32,7 @@
 
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
-                <input type="email" placeholder="your.email@example.com" required
+                <input type="email" id="reg-email" placeholder="your.email@example.com" required
                     class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition">
             </div>
 
@@ -40,7 +40,7 @@
                 <label class="block text-sm font-semibold text-gray-700 mb-2">Role</label>
                 <div class="relative">
                     <select id="role-select" onchange="toggleOrganization()" required
-                        class="w-full px-4 py-3 rounded-lg border border-gray-200 appearance-none focus:ring-2 focus:ring-blue-500 outline-none bg-white transition cursor-pointer">
+                        class="w-full px-4 py-3 rounded-lg border border-gray-200 appearance-none focus:ring-2 focus:ring-blue-500 outline-none bg-white transition cursor-pointer font-medium">
                         <option value="none" selected disabled>Select your role</option>
                         <option value="proponent">Project Proponent</option>
                         <option value="scrutiny">Scrutiny Team</option>
@@ -53,19 +53,19 @@
 
             <div id="org-field" class="hidden">
                 <label class="block text-sm font-semibold text-gray-700 mb-2">Organization</label>
-                <input type="text" placeholder="Your organization name"
+                <input type="text" id="org-name" placeholder="Your organization name"
                     class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition">
             </div>
 
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-2">Password</label>
-                <input type="password" placeholder="Enter password (min 6 characters)" required
+                <input type="password" id="reg-password" placeholder="Enter password" required
                     class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition">
             </div>
 
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-2">Confirm Password</label>
-                <input type="password" placeholder="Confirm your password" required
+                <input type="password" id="confirm-password" placeholder="Confirm your password" required
                     class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition">
             </div>
 
@@ -85,13 +85,9 @@
     </div>
 
     <script>
-        /**
-         * Logic to show/hide the Organization input field
-         */
         function toggleOrganization() {
             const roleSelect = document.getElementById('role-select');
             const orgField = document.getElementById('org-field');
-
             if (roleSelect.value === 'proponent') {
                 orgField.classList.remove('hidden');
             } else {
@@ -99,25 +95,49 @@
             }
         }
 
-        /**
-         * Role-based redirection and Name storage
-         */
         function handleRegistration(event) {
             event.preventDefault(); 
             
-            // Specifically capture the name by its ID
             const fullName = document.getElementById('full-name').value;
+            const email = document.getElementById('reg-email').value;
             const roleValue = document.getElementById('role-select').value;
+            const password = document.getElementById('reg-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
 
             if (roleValue === 'none') {
                 alert('Please select a role.');
                 return;
             }
 
-            // Save the name to browser memory for the dashboards to display
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            // Get existing users from localStorage or initialize empty array
+            let users = JSON.parse(localStorage.getItem('pariveshUsers')) || [];
+
+            // Check if user already exists
+            if (users.find(u => u.email === email)) {
+                alert('User with this email already exists!');
+                return;
+            }
+
+            // Add new user to the list
+            users.push({
+                name: fullName,
+                email: email,
+                role: roleValue,
+                password: password
+            });
+
+            // Save updated list back to localStorage
+            localStorage.setItem('pariveshUsers', JSON.stringify(users));
+
+            // Set current session data
             localStorage.setItem('userFullName', fullName);
 
-            // Redirection logic based on selected role
+            // Redirection logic
             const dashboards = {
                 'proponent': 'proponent-dashboard.html',
                 'mom': 'mom-dashboard.html',
@@ -125,13 +145,8 @@
                 'admin': 'admin-dashboard.html'
             };
 
-            if (dashboards[roleValue]) {
-                window.location.href = dashboards[roleValue];
-            } else {
-                alert('Registration successful for ' + roleValue);
-            }
+            window.location.href = dashboards[roleValue];
         }
     </script>
-
 </body>
 </html>

@@ -39,7 +39,6 @@
     </header>
 
     <main class="max-w-5xl mx-auto px-6 py-12">
-        
         <div class="mb-10 flex items-center gap-5">
             <a href="proponent-dashboard.html" class="w-11 h-11 bg-white border border-gray-200 rounded-xl flex items-center justify-center text-gray-400 hover:text-blue-600 hover:border-blue-200 transition shadow-sm">
                 <i class="fa-solid fa-arrow-left"></i>
@@ -108,7 +107,7 @@
                         <div class="space-y-2">
                             <label class="block text-sm font-bold text-gray-700">Estimated Investment (INR Crores) *</label>
                             <input type="number" id="projCost" placeholder="0.00" required
-                                class="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-4 focus:ring-blue-500/10 outline-none transition bg-gray-50/30">
+                                class="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-4 focus:ring-blue-500/10 outline-none transition bg-gray-50/30 font-bold text-blue-600">
                         </div>
 
                         <div class="space-y-2">
@@ -132,28 +131,49 @@
     </main>
 
     <script>
-        // Load User Info
         window.onload = function() {
-            const name = localStorage.getItem('userFullName') ;
-            document.getElementById('userDisplay').innerText = name;
+            const name = localStorage.getItem('userFullName');
+            document.getElementById('userDisplay').innerText = name || 'User';
         };
 
         function saveAndContinue(event) {
             event.preventDefault();
 
-            // Store form data for step 2
+            // 1. Generate real-time identifiers
+            const randomID = Math.floor(1000 + Math.random() * 9000);
+            const sectorValue = document.getElementById('projSector').value;
+            const proposalNumber = `IA/CH/${sectorValue.substring(0,3).toUpperCase()}/${randomID}/2026`;
+
+            // 2. Prepare unified data object (using keys expected by dashboard)
             const applicationData = {
+                // Dashboard table keys
+                id: proposalNumber,
                 name: document.getElementById('projName').value,
+                
+                // Sidebar / Global Display keys
+                projectName: document.getElementById('projName').value,
+                proposalNo: proposalNumber,
+                
+                // Other details
                 category: document.getElementById('projCat').value,
-                sector: document.getElementById('projSector').value,
+                sector: sectorValue,
                 location: document.getElementById('projLoc').value,
                 cost: document.getElementById('projCost').value,
-                date: new Date().toLocaleDateString()
+                description: document.getElementById('projDesc').value,
+                submissionDate: new Date().toLocaleDateString(),
+                status: "Pending Scrutiny",
+                documentId: "DOC-" + randomID
             };
 
-            localStorage.setItem('tempAppData', JSON.stringify(applicationData));
+            // 3. Save as the single active session
+            localStorage.setItem('currentApplication', JSON.stringify(applicationData));
 
-            // Redirect to Step 2
+            // 4. Update the Scrutiny Queue (adds this to the list of all projects)
+            let scrutinyQueue = JSON.parse(localStorage.getItem('scrutinyQueue')) || [];
+            scrutinyQueue.push(applicationData);
+            localStorage.setItem('scrutinyQueue', JSON.stringify(scrutinyQueue));
+
+            // 5. Move to next step
             window.location.href = 'application-step-2.html';
         }
     </script>

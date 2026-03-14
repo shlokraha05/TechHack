@@ -10,6 +10,10 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
         .nav-link { transition: all 0.3s ease; }
+        /* Custom scrollbar for the legal checklist */
+        .legal-scroll::-webkit-scrollbar { width: 4px; }
+        .legal-scroll::-webkit-scrollbar-track { background: #f1f1f1; }
+        .legal-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
     </style>
 </head>
 <body>
@@ -139,9 +143,62 @@
         </div>
     </section>
 
-    <footer class="bg-white border-t border-gray-100 pt-20 pb-10">
-        <div class="text-center px-4">
-            <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-2">© 2026 PARIVESH 3.0 - Ministry of Environment, Forest and Climate Change </p>
+    <footer class="bg-white border-t border-gray-100 pt-16 pb-10">
+        <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
+            <div class="space-y-6">
+                <div class="flex items-center gap-3">
+                    <div class="bg-gray-900 text-white font-bold px-3 py-2 rounded-lg text-xl">P3</div>
+                    <h1 class="font-bold text-gray-800 text-lg">PARIVESH 3.0</h1>
+                </div>
+                <p class="text-gray-500 text-sm leading-relaxed">
+                    A Single Window Hub for Environment, Forest, Wildlife and CRZ clearances. Ensuring transparent and efficient governance.
+                </p>
+            </div>
+
+            <div class="lg:col-span-2 bg-gray-50 rounded-[2rem] p-8 border border-gray-100">
+                <div class="flex items-center gap-3 mb-6">
+                    <i class="fa-solid fa-gavel text-blue-600"></i>
+                    <h4 class="text-sm font-black text-gray-800 uppercase tracking-widest">Legal Declarations & Guidelines</h4>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 text-[13px] text-gray-600 font-medium legal-scroll max-h-48 overflow-y-auto pr-4">
+                    <div class="flex gap-3 items-start">
+                        <i class="fa-solid fa-check-double text-blue-500 mt-1"></i>
+                        <span>Top soil will be preserved & stored within safety zones.</span>
+                    </div>
+                    <div class="flex gap-3 items-start">
+                        <i class="fa-solid fa-check-double text-blue-500 mt-1"></i>
+                        <span>Survival rate of plantation must be maintained at 90%.</span>
+                    </div>
+                    <div class="flex gap-3 items-start">
+                        <i class="fa-solid fa-check-double text-blue-500 mt-1"></i>
+                        <span>No excavation will be performed outside the applied lease area.</span>
+                    </div>
+                    <div class="flex gap-3 items-start">
+                        <i class="fa-solid fa-check-double text-blue-500 mt-1"></i>
+                        <span>Demarcation pillars will be installed as per Mineral Concession Rules.</span>
+                    </div>
+                    <div class="flex gap-3 items-start">
+                        <i class="fa-solid fa-check-double text-blue-500 mt-1"></i>
+                        <span>Controlled blasting will only be performed by DGMS authorized holders.</span>
+                    </div>
+                    <div class="flex gap-3 items-start">
+                        <i class="fa-solid fa-check-double text-blue-500 mt-1"></i>
+                        <span>Employment priority will be given to local residents as per State rules.</span>
+                    </div>
+                    <div class="flex gap-3 items-start">
+                        <i class="fa-solid fa-check-double text-blue-500 mt-1"></i>
+                        <span>Water sprinkling arrangements must be active for dust emission control.</span>
+                    </div>
+                    <div class="flex gap-3 items-start">
+                        <i class="fa-solid fa-check-double text-blue-500 mt-1"></i>
+                        <span>Polluted water shall not be released into any natural water source.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center px-4 border-t border-gray-50 pt-10">
+            <p class="text-gray-400 text-[10px] font-black uppercase tracking-[0.2em] mb-2">© 2026 PARIVESH 3.0 - Ministry of Environment, Forest and Climate Change </p>
             <p class="text-gray-500 text-sm font-medium">Developed by National Informatics Centre</p>
         </div>
     </footer>
