@@ -26,7 +26,7 @@
         <form id="registrationForm" onsubmit="handleRegistration(event)" class="space-y-5">
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
-                <input type="text" placeholder="John Doe" required
+                <input type="text" id="full-name" placeholder="John Doe" required
                     class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition">
             </div>
 
@@ -100,11 +100,13 @@
         }
 
         /**
-         * Role-based redirection logic
+         * Role-based redirection and Name storage
          */
         function handleRegistration(event) {
             event.preventDefault(); 
             
+            // Specifically capture the name by its ID
+            const fullName = document.getElementById('full-name').value;
             const roleValue = document.getElementById('role-select').value;
 
             if (roleValue === 'none') {
@@ -112,22 +114,21 @@
                 return;
             }
 
-            // Redirect to appropriate dashboards
-            switch(roleValue) {
-                case 'proponent':
-                    window.location.href = 'proponent-dashboard.html';
-                    break;
-                case 'mom':
-                    window.location.href = 'mom-dashboard.html';
-                    break;
-                case 'scrutiny':
-                    window.location.href = 'scrutiny-dashboard.html';
-                    break;
-                case 'admin':
-                    window.location.href = 'admin-dashboard.html';
-                    break;
-                default:
-                    alert('Registration successful for ' + roleValue);
+            // Save the name to browser memory for the dashboards to display
+            localStorage.setItem('userFullName', fullName);
+
+            // Redirection logic based on selected role
+            const dashboards = {
+                'proponent': 'proponent-dashboard.html',
+                'mom': 'mom-dashboard.html',
+                'scrutiny': 'scrutiny-dashboard.html',
+                'admin': 'admin-dashboard.html'
+            };
+
+            if (dashboards[roleValue]) {
+                window.location.href = dashboards[roleValue];
+            } else {
+                alert('Registration successful for ' + roleValue);
             }
         }
     </script>

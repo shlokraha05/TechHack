@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compliance & Payment | PARIVESH 3.0</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+    </style>
+</head>
+<body>
+
+    <header class="bg-white px-8 py-4 flex justify-between items-center border-b border-gray-100 sticky top-0 z-50">
+        <div class="flex items-center gap-3">
+            <div class="bg-blue-600 text-white font-bold px-3 py-2 rounded-lg text-xl shadow-md shadow-blue-100">P3</div>
+            <h1 class="font-bold text-gray-800 text-lg">PARIVESH 3.0</h1>
+        </div>
+        <div class="text-sm font-bold text-blue-600 bg-blue-50 px-4 py-2 rounded-full">Step 2 of 2</div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 py-12">
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold text-gray-900">Finalize Application</h2>
+            <p class="text-gray-500">Project: <span id="displayProjName" class="font-bold text-blue-600">Loading...</span></p>
+        </div>
+
+        <section class="bg-white rounded-3xl border border-gray-100 p-8 shadow-sm mb-8">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="w-10 h-10 bg-blue-600 text-white rounded-xl flex items-center justify-center shadow-lg shadow-blue-100">
+                    <i class="fa-solid fa-file-shield"></i>
+                </div>
+                <h3 class="text-lg font-bold text-gray-800">Technical Document Engine *</h3>
+            </div>
+
+            <div id="drop-zone" onclick="document.getElementById('file-input').click()" class="border-2 border-dashed border-gray-200 rounded-2xl p-10 text-center hover:border-blue-400 transition cursor-pointer bg-gray-50/30">
+                <input type="file" id="file-input" class="hidden" accept=".pdf" onchange="processFile(this)">
+                <i class="fa-solid fa-cloud-arrow-up text-4xl text-gray-300 mb-4"></i>
+                <p class="text-gray-600 font-medium">Upload Mandatory Clearance PDF</p>
+                <p class="text-xs text-gray-400 mt-2">Engine will automatically verify document integrity</p>
+            </div>
+
+            <div id="engine-loader" class="hidden mt-6 p-4 rounded-xl border border-blue-100 bg-blue-50 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <i id="status-icon" class="fa-solid fa-circle-notch fa-spin text-blue-600"></i>
+                    <span id="status-text" class="text-sm font-bold text-blue-700">Analyzing with Document Engine...</span>
+                </div>
+                <span id="doc-id" class="text-xs font-mono font-bold text-blue-500"></span>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-3xl border border-gray-100 p-8 shadow-sm">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-10 h-10 bg-green-500 text-white rounded-xl flex items-center justify-center shadow-lg shadow-green-100">
+                    <i class="fa-solid fa-indian-rupee-sign"></i>
+                </div>
+                <h3 class="text-lg font-bold text-gray-800">Processing Fee: ₹ 5,000 *</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="border border-gray-100 rounded-2xl p-6 text-center bg-gray-50">
+                    <p class="text-[10px] font-bold text-gray-400 uppercase mb-4">Scan QR to Pay</p>
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=PARIVESH_PAY" class="w-32 h-32 mx-auto rounded-lg shadow-sm">
+                </div>
+                <div class="flex flex-col justify-center gap-4">
+                    <label class="text-sm font-bold text-gray-700">UPI Payment *</label>
+                    <input type="text" id="upi-id" placeholder="enter-upi-id@bank" class="w-full px-5 py-3 rounded-xl border border-gray-200 outline-none focus:ring-2 focus:ring-blue-500">
+                    <div class="flex gap-4 items-center opacity-40">
+                        <i class="fa-brands fa-google-pay text-2xl"></i>
+                        <i class="fa-brands fa-apple-pay text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="finalSubmission()" class="w-full mt-10 bg-gray-950 text-white py-4 rounded-2xl font-bold hover:bg-black transition shadow-xl active:scale-95">
+                Confirm & Submit Application
+            </button>
+        </section>
+    </main>
+
+    <script>
+        let isDocumentVerified = false;
+
+        window.onload = () => {
+            const data = JSON.parse(localStorage.getItem('currentApplication'));
+            if (data) document.getElementById('displayProjName').innerText = data.name;
+        };
+
+        function processFile(input) {
+            if (input.files[0]) {
+                const loader = document.getElementById('engine-loader');
+                const text = document.getElementById('status-text');
+                const icon = document.getElementById('status-icon');
+                
+                loader.classList.remove('hidden');
+                isDocumentVerified = false; 
+                
+                setTimeout(() => {
+                    text.innerText = "Document Integrity Verified (OCR Success)";
+                    text.classList.replace('text-blue-700', 'text-green-700');
+                    icon.classList.replace('fa-circle-notch', 'fa-circle-check');
+                    icon.classList.remove('fa-spin');
+                    icon.classList.replace('text-blue-600', 'text-green-600');
+                    document.getElementById('doc-id').innerText = "ID: P3-2026-X8";
+                    
+                    isDocumentVerified = true; 
+                }, 2500);
+            }
+        }
+
+        function finalSubmission() {
+            const upiValue = document.getElementById('upi-id').value.trim();
+
+            // Validation Checks
+            if (!isDocumentVerified) {
+                alert("Please upload the mandatory Clearance PDF and wait for verification.");
+                return;
+            }
+
+            if (upiValue === "") {
+                alert("Please enter a valid UPI ID for the processing fee.");
+                document.getElementById('upi-id').focus();
+                return;
+            }
+
+            // Get Step 1 data
+            const currentAppData = JSON.parse(localStorage.getItem('currentApplication')) || {};
+            
+            // Build Final Submission Object for Scrutiny Queue
+            const submissionRecord = {
+                ...currentAppData,
+                id: "P3-" + Math.floor(1000 + Math.random() * 9000),
+                status: "Submitted",
+                submissionDate: new Date().toLocaleDateString(),
+                documentId: document.getElementById('doc-id').innerText,
+                upi: upiValue
+            };
+
+            // Push to Scrutiny Queue (Internal Logic)
+            let scrutinyQueue = JSON.parse(localStorage.getItem('scrutinyQueue')) || [];
+            scrutinyQueue.push(submissionRecord);
+            localStorage.setItem('scrutinyQueue', JSON.stringify(scrutinyQueue));
+
+            alert("Application Successfully Filed! Moving to Scrutiny Stage.");
+            window.location.href = 'proponent-dashboard.html';
+        }
+    </script>
+</body>
+</html>

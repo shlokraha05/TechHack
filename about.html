@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | PARIVESH 3.0</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+    </style>
+</head>
+<body>
+
+    <header class="bg-white px-8 py-4 border-b border-gray-100 flex justify-between items-center shadow-sm">
+        <div class="flex items-center gap-3">
+            <div class="bg-blue-600 text-white font-bold px-3 py-2 rounded-lg text-xl">P3</div>
+            <h1 class="font-bold text-gray-800 text-lg uppercase tracking-tight">PARIVESH 3.0</h1>
+        </div>
+        <button onclick="window.close()" class="text-sm font-bold text-gray-400 hover:text-red-500 transition">
+            <i class="fa-solid fa-xmark mr-1"></i> Close Tab
+        </button>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-6 py-16">
+        <section class="mb-16">
+            <h2 class="text-4xl font-extrabold text-gray-900 mb-6">About the Portal</h2>
+            <p class="text-lg text-gray-600 leading-relaxed mb-4">
+                PARIVESH 3.0 is a next-generation, role-based workflow system designed to improve transparency, efficiency, and speed in environmental clearances 
+            </p>
+            <p class="text-lg text-gray-600 leading-relaxed">
+                The portal facilitates the end-to-end lifecycle of an application—from initial filing by a proponent to the final publication of the Minutes of the Meeting (MoM)
+            </p>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+            <div class="p-8 bg-white rounded-3xl border border-gray-100 shadow-sm">
+                <h3 class="text-xl font-bold text-blue-600 mb-4"><i class="fa-solid fa-shield-halved mr-2"></i>Admin Control</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">
+                    Manages dynamic role assignments and provisions master templates for "Gist" documents based on application categories (A, B1, B2)
+                </p>
+            </div>
+            <div class="p-8 bg-white rounded-3xl border border-gray-100 shadow-sm">
+                <h3 class="text-xl font-bold text-blue-600 mb-4"><i class="fa-solid fa-file-pen mr-2"></i>Proponent Filing</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">
+                    Provides a multi-step digital form for project details, secure document attachments, and integrated UPI/QR fee payments
+                </p>
+            </div>
+            <div class="p-8 bg-white rounded-3xl border border-gray-100 shadow-sm">
+                <h3 class="text-xl font-bold text-blue-600 mb-4"><i class="fa-solid fa-magnifying-glass mr-2"></i>Verification Unit</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">
+                    Reviews documents and flags deficiencies via Essential Document Sought (EDS) to return applications for correction
+                </p>
+            </div>
+            <div class="p-8 bg-white rounded-3xl border border-gray-100 shadow-sm">
+                <h3 class="text-xl font-bold text-blue-600 mb-4"><i class="fa-solid fa-lock mr-2"></i>Secretariat Security</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">
+                    Transforms edited gists into formal MoMs and locks them to prevent further edits after publication
+                </p>
+            </div>
+        </section>
+
+        <section class="bg-blue-600 rounded-[2.5rem] p-12 text-white">
+            <h3 class="text-2xl font-bold mb-8 text-center">Linear Workflow Integrity</h3>
+            <div class="flex flex-wrap justify-center gap-4 text-sm font-bold uppercase tracking-wider">
+                <span class="bg-white/20 px-4 py-2 rounded-lg">Draft</span>
+                <i class="fa-solid fa-arrow-right self-center opacity-50"></i>
+                <span class="bg-white/20 px-4 py-2 rounded-lg">Submitted</span>
+                <i class="fa-solid fa-arrow-right self-center opacity-50"></i>
+                <span class="bg-white/20 px-4 py-2 rounded-lg">Under Scrutiny</span>
+                <i class="fa-solid fa-arrow-right self-center opacity-50"></i>
+                <span class="bg-white/20 px-4 py-2 rounded-lg">Referred</span>
+                <i class="fa-solid fa-arrow-right self-center opacity-50"></i>
+                <span class="bg-white/20 px-4 py-2 rounded-lg">Finalized</span>
+            </div>
+            <p class="mt-8 text-center text-blue-100 text-sm">
+                Applications flow linearly to ensure security and data isolation between roles
+            </p>
+        </section>
+    </main>
+
+    <footer class="text-center py-12 border-t border-gray-100">
+        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">
+            © 2026 Ministry of Environment, Forest and Climate Change
+        </p>
+    </footer>
+
+</body>
+</html>

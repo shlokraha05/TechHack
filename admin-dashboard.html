@@ -7,121 +7,189 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        .dashboard-card { transition: all 0.3s ease; }
-        .quick-action-btn { transition: all 0.2s ease; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .active-tab { border-color: #dc2626; color: #dc2626; }
+        
+        /* Success Animation */
+        .check-draw {
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+            animation: draw 0.6s ease-out forwards;
+        }
+        @keyframes draw { to { stroke-dashoffset: 0; } }
     </style>
 </head>
 <body>
 
-    <header class="bg-white px-8 py-3 flex justify-between items-center border-b border-gray-100">
+    <header class="bg-white px-8 py-3 flex justify-between items-center border-b border-gray-100 sticky top-0 z-50">
         <div class="flex items-center gap-3">
-            <div class="bg-blue-600 text-white font-bold px-3 py-2 rounded-lg text-xl shadow-md shadow-blue-100">P3</div>
+            <div class="bg-red-600 text-white font-bold px-3 py-2 rounded-lg text-xl shadow-md shadow-red-100">P3</div>
             <div>
-                <h1 class="font-bold text-gray-800 text-lg leading-none">PARIVESH 3.0</h1>
-                <p class="text-xs text-gray-500 mt-1 uppercase font-semibold">Admin Dashboard</p>
+                <h1 class="font-bold text-gray-800 text-lg leading-none tracking-tighter">PARIVESH 3.0</h1>
+                <p class="text-[10px] text-gray-400 mt-1 uppercase font-black tracking-widest">System Administrator</p>
             </div>
         </div>
         <div class="flex items-center gap-6">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center text-red-600 border border-red-200">
-                    <i class="fa-solid fa-user-shield"></i>
-                </div>
-                <div class="text-left">
-                    <p class="text-sm font-bold text-gray-800 leading-none">sayan debnath</p>
-                    <p class="text-[10px] text-gray-400 font-bold mt-1 uppercase">Administrator</p>
-                </div>
+            <div class="text-right border-r border-gray-100 pr-6">
+                <p class="text-sm font-bold text-gray-800">Admin User</p>
+                <p class="text-[10px] text-red-500 font-black uppercase">Root Access</p>
             </div>
-            <a href="index.html" class="flex items-center gap-2 text-gray-400 hover:text-red-500 transition text-sm font-bold">
-                <i class="fa-solid fa-power-off"></i> Logout
-            </a>
+            <a href="index.html" class="text-gray-400 hover:text-red-600 transition"><i class="fa-solid fa-power-off"></i></a>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-6 py-12">
+    <main class="max-w-7xl mx-auto px-6 py-10">
         
-        <div class="mb-12">
-            <h2 class="text-4xl font-extrabold text-gray-950 tracking-tighter">Admin Dashboard</h2>
-            <p class="text-gray-500 mt-1 text-lg">System overview and management console.</p>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            <div class="bg-red-600 p-7 rounded-3xl text-white shadow-xl shadow-red-100 flex justify-between items-center dashboard-card">
-                <div>
-                    <p class="text-red-100 text-sm font-bold uppercase tracking-wider">Total Applications</p>
-                    <h3 class="text-5xl font-black mt-2">0</h3>
-                </div>
-                <i class="fa-solid fa-paste text-4xl opacity-50"></i>
+        <div id="mainDashboard">
+            <div class="mb-10 flex justify-between items-center">
+                <h2 class="text-4xl font-black text-gray-950 tracking-tighter">Control Center</h2>
+                <button onclick="showAddUserPage()" class="bg-red-600 text-white px-8 py-4 rounded-2xl text-xs font-black uppercase tracking-widest shadow-xl shadow-red-100 hover:bg-red-700 transition transform active:scale-95 flex items-center gap-3">
+                    <i class="fa-solid fa-user-plus"></i> Add New User
+                </button>
             </div>
 
-            <div class="bg-white p-7 rounded-3xl border border-gray-100 shadow-sm flex justify-between items-center dashboard-card hover:border-yellow-100">
-                <div>
-                    <p class="text-gray-400 text-sm font-bold uppercase tracking-wider">Pending Scrutiny</p>
-                    <h3 class="text-5xl font-black text-gray-900 mt-2">0</h3>
-                </div>
-                <i class="fa-solid fa-file-circle-exclamation text-4xl text-yellow-500 opacity-90"></i>
-            </div>
-
-            <div class="bg-white p-7 rounded-3xl border border-gray-100 shadow-sm flex justify-between items-center dashboard-card hover:border-green-100">
-                <div>
-                    <p class="text-gray-400 text-sm font-bold uppercase tracking-wider">Finalized</p>
-                    <h3 class="text-5xl font-black text-gray-900 mt-2">0</h3>
-                </div>
-                <i class="fa-solid fa-circle-check text-4xl text-green-500 opacity-90"></i>
-            </div>
-
-            <div class="bg-white p-7 rounded-3xl border border-gray-100 shadow-sm flex justify-between items-center dashboard-card hover:border-blue-100">
-                <div>
-                    <p class="text-gray-400 text-sm font-bold uppercase tracking-wider">Total Users</p>
-                    <h3 class="text-5xl font-black text-gray-900 mt-2">0</h3>
-                </div>
-                <i class="fa-solid fa-users-gear text-4xl text-blue-600 opacity-90"></i>
+            <div class="bg-white rounded-[2.5rem] border border-gray-100 shadow-sm overflow-hidden">
+                <table class="w-full text-left">
+                    <thead class="bg-gray-50 border-b border-gray-100">
+                        <tr>
+                            <th class="px-8 py-5 text-[10px] font-black text-gray-400 uppercase">System ID</th>
+                            <th class="px-8 py-5 text-[10px] font-black text-gray-400 uppercase">User Name</th>
+                            <th class="px-8 py-5 text-[10px] font-black text-gray-400 uppercase">Portal Role</th>
+                            <th class="px-8 py-5 text-[10px] font-black text-gray-400 uppercase">Email Dispatch</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userTableBody" class="divide-y divide-gray-50 text-sm font-bold text-gray-700">
+                        </tbody>
+                </table>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            
-            <div class="bg-white rounded-3xl border border-gray-100 p-8 shadow-sm">
-                <h4 class="text-xl font-bold text-gray-900 mb-8 flex items-center gap-3">
-                    <i class="fa-solid fa-bolt text-red-500"></i> Quick Actions
-                </h4>
-                
-                <div class="space-y-4">
-                    <a href="#" class="block w-full text-center bg-red-600 hover:bg-red-700 text-white font-bold py-4 rounded-xl quick-action-btn shadow-md shadow-red-100 flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-file-invoice text-sm"></i> Manage Templates
-                    </a>
-                    <a href="scrutiny-dashboard.html" class="block w-full text-center bg-white border border-gray-200 text-gray-800 font-semibold py-4 rounded-xl quick-action-btn hover:bg-gray-50 hover:border-gray-300">
-                        View Scrutiny Dashboard
-                    </a>
-                    <a href="mom-dashboard.html" class="block w-full text-center bg-white border border-gray-200 text-gray-800 font-semibold py-4 rounded-xl quick-action-btn hover:bg-gray-50 hover:border-gray-300">
-                        View MoM Dashboard
-                    </a>
+        <div id="addUserPage" class="hidden max-w-2xl mx-auto">
+            <div class="bg-white rounded-[3rem] shadow-2xl overflow-hidden border border-gray-100">
+                <div class="p-10 border-b border-gray-50">
+                    <h3 class="text-3xl font-black text-gray-900 tracking-tight">Provision User</h3>
+                    <p class="text-gray-400 text-sm mt-1">Credentials will be auto-generated and sent via email.</p>
                 </div>
+                <form id="userForm" class="p-10 space-y-6">
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-black text-gray-400 uppercase ml-1">Official Name</label>
+                        <input type="text" id="fn" required class="w-full bg-gray-50 p-4 rounded-2xl outline-none focus:ring-2 focus:ring-red-600 transition-all font-bold" placeholder="e.g. Rahul Sharma">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-black text-gray-400 uppercase ml-1">Email ID</label>
+                        <input type="email" id="em" required class="w-full bg-gray-50 p-4 rounded-2xl outline-none focus:ring-2 focus:ring-red-600 transition-all font-bold" placeholder="official@nic.in">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-black text-gray-400 uppercase ml-1">Portal Assignment</label>
+                        <select id="rl" required class="w-full bg-gray-50 p-4 rounded-2xl outline-none focus:ring-2 focus:ring-red-600 transition-all font-bold cursor-pointer">
+                            <option value="Scrutiny Team">Scrutiny Team</option>
+                            <option value="MoM Team">MoM Team (Secretariat)</option>
+                        </select>
+                    </div>
+                    <div class="flex gap-4 pt-4">
+                        <button type="button" onclick="hideAddUserPage()" class="flex-1 py-4 text-gray-400 font-bold hover:text-gray-900 transition">Cancel</button>
+                        <button type="submit" class="flex-1 bg-gray-900 text-white py-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl">Generate & Send Email</button>
+                    </div>
+                </form>
             </div>
+        </div>
 
-            <div class="bg-white rounded-3xl border border-gray-100 p-8 shadow-sm">
-                <h4 class="text-xl font-bold text-gray-900 mb-8 flex items-center gap-3">
-                    <i class="fa-solid fa-server text-blue-600"></i> System Status
-                </h4>
-                
-                <div class="space-y-6">
-                    <div class="flex justify-between items-center border-b border-gray-50 pb-4">
-                        <span class="text-gray-700 font-medium">Under Scrutiny</span>
-                        <span class="text-2xl font-bold text-gray-950">0</span>
+        <div id="emailModal" class="hidden fixed inset-0 bg-gray-900/80 backdrop-blur-md z-[100] flex items-center justify-center p-6">
+            <div class="bg-white rounded-[3rem] w-full max-w-lg overflow-hidden shadow-2xl transform transition-all scale-100">
+                <div class="bg-emerald-500 p-8 text-center text-white">
+                    <svg class="w-16 h-16 mx-auto mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                        <path class="check-draw" d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <h4 class="text-2xl font-black uppercase tracking-tight">Email Sent Successfully!</h4>
+                </div>
+                <div class="p-10 space-y-6">
+                    <p class="text-gray-500 text-center font-medium">An automated email has been dispatched to <span id="sentEmail" class="text-gray-900 font-bold"></span> with the following credentials:</p>
+                    
+                    <div class="bg-gray-50 p-6 rounded-3xl border border-dashed border-gray-200 space-y-4">
+                        <div>
+                            <p class="text-[10px] font-black text-gray-400 uppercase mb-1">Generated User ID</p>
+                            <p id="genID" class="text-xl font-black text-red-600 tracking-wider"></p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-black text-gray-400 uppercase mb-1">Temporary Password</p>
+                            <p id="genPW" class="text-xl font-black text-gray-900 tracking-wider">********</p>
+                        </div>
                     </div>
-                    <div class="flex justify-between items-center border-b border-gray-50 pb-4">
-                        <span class="text-gray-700 font-medium">Referred to Meeting</span>
-                        <span class="text-2xl font-bold text-gray-950">0</span>
-                    </div>
-                    <div class="flex justify-between items-center pb-4">
-                        <span class="text-gray-700 font-medium">Proponents Active</span>
-                        <span class="text-2xl font-bold text-gray-950">0</span>
-                    </div>
+
+                    <button onclick="closeEmailModal()" class="w-full bg-[#0f172a] text-white py-5 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl hover:bg-black transition-all">
+                        Back to Control Center
+                    </button>
                 </div>
             </div>
         </div>
 
     </main>
 
+    <script>
+        let users = JSON.parse(localStorage.getItem('pariveshUsers')) || [];
+
+        function renderUsers() {
+            const tbody = document.getElementById('userTableBody');
+            tbody.innerHTML = users.map(u => `
+                <tr class="hover:bg-gray-50/50 transition">
+                    <td class="px-8 py-6 font-mono text-red-600">${u.id}</td>
+                    <td class="px-8 py-6">${u.name}</td>
+                    <td class="px-8 py-6">
+                        <span class="px-3 py-1 rounded-lg text-[10px] uppercase font-black ${u.role.includes('Scrutiny') ? 'bg-blue-50 text-blue-600' : 'bg-amber-50 text-amber-600'}">
+                            ${u.role}
+                        </span>
+                    </td>
+                    <td class="px-8 py-6 text-emerald-600 text-xs font-black uppercase italic tracking-tighter">
+                        <i class="fa-solid fa-paper-plane mr-2"></i> Delivered
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function showAddUserPage() {
+            document.getElementById('mainDashboard').classList.add('hidden');
+            document.getElementById('addUserPage').classList.remove('hidden');
+        }
+
+        function hideAddUserPage() {
+            document.getElementById('mainDashboard').classList.remove('hidden');
+            document.getElementById('addUserPage').classList.add('hidden');
+        }
+
+        document.getElementById('userForm').onsubmit = function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('em').value;
+            const name = document.getElementById('fn').value;
+            const role = document.getElementById('rl').value;
+
+            // 1. Generate Automated Credentials
+            const uniqueID = `P3-${Math.floor(1000 + Math.random() * 9000)}-NIC`;
+            const tempPW = Math.random().toString(36).slice(-8).toUpperCase(); // Random 8-char password
+
+            // 2. Save User
+            const newUser = { id: uniqueID, name, email, role, password: tempPW };
+            users.push(newUser);
+            localStorage.setItem('pariveshUsers', JSON.stringify(users));
+
+            // 3. Show "Email Sent" Simulation
+            document.getElementById('sentEmail').innerText = email;
+            document.getElementById('genID').innerText = uniqueID;
+            document.getElementById('genPW').innerText = tempPW;
+            
+            document.getElementById('emailModal').classList.remove('hidden');
+        };
+
+        function closeEmailModal() {
+            document.getElementById('emailModal').classList.add('hidden');
+            hideAddUserPage();
+            renderUsers();
+        }
+
+        window.onload = renderUsers;
+    </script>
 </body>
 </html>
