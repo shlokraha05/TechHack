@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard | PARIVESH 3.0</title>
+    <title>Admin Control Center | PARIVESH 3.0</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -11,227 +11,187 @@
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
-        .active-tab { border-color: #2660dc; color: #1e293b; }
-        
-        /* Progress Tab Styling */
-        .report-tab.active { background-color: #1e293b; color: white; }
-        .report-section { display: none; }
-        .report-section.active { display: block; animation: fadeIn 0.4s ease-out; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .active-tab { border-bottom: 3px solid #dc2626; color: #111827; }
     </style>
 </head>
-<body>
+<body class="min-h-screen">
 
-    <header class="bg-white px-8 py-3 flex justify-between items-center border-b border-gray-100 sticky top-0 z-50">
+    <header class="bg-white px-8 py-4 flex justify-between items-center border-b border-gray-100 sticky top-0 z-50">
         <div class="flex items-center gap-3">
-            <div class="bg-red-600 text-white font-bold px-3 py-2 rounded-lg text-xl shadow-md shadow-red-100">P3</div>
-            <div>
-                <h1 class="font-bold text-gray-800 text-lg leading-none">PARIVESH 3.0</h1>
-                <p class="text-xs text-gray-500 mt-1 uppercase font-semibold tracking-tighter">System Administrator</p>
-            </div>
+            <div class="bg-red-600 text-white font-bold px-3 py-1.5 rounded-lg shadow-lg shadow-red-100">P3</div>
+            <h1 class="font-bold text-gray-900">PARIVESH 3.0 <span class="text-gray-400 font-medium ml-2 text-sm">| Admin Dashboard</span></h1>
         </div>
-        <div class="flex items-center gap-6">
-            <div class="text-right border-r border-gray-100 pr-6">
-                <p id="displayName" class="text-sm font-bold text-gray-800 leading-none">Admin User</p>
-                <p class="text-[10px] text-gray-400 font-black mt-1 uppercase">Root Access</p>
+        <div class="flex items-center gap-4">
+            <div class="text-right hidden md:block">
+                <p class="text-xs font-black text-gray-900 uppercase leading-none">Root Access</p>
+                <p class="text-[10px] text-emerald-500 font-bold uppercase mt-1">System Live</p>
             </div>
-            <a href="index.html" class="text-gray-400 hover:text-red-600 transition text-sm font-bold"><i class="fa-solid fa-power-off"></i></a>
+            <a href="index.html" class="text-gray-300 hover:text-red-600 transition text-lg"><i class="fa-solid fa-power-off"></i></a>
         </div>
     </header>
 
     <main class="max-w-7xl mx-auto px-6 py-10">
         
-        <div id="mainDashboard">
-            <div class="mb-10 flex justify-between items-end">
-                <div>
-                    <h2 class="text-4xl font-black text-gray-950 tracking-tighter">Control Center</h2>
-                    <p class="text-gray-500 font-medium">Configure roles and monitor cross-team progress reports.</p>
-                </div>
-                <div class="bg-emerald-100 text-emerald-700 px-4 py-2 rounded-xl text-xs font-black uppercase flex items-center gap-2">
-                    <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span> System Online
-                </div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+            <div class="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-sm">
+                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Total Staff</p>
+                <h4 id="stat-total-users" class="text-3xl font-black text-gray-900 mt-1">0</h4>
             </div>
-
-            <div class="flex gap-8 border-b border-gray-200 mb-8 overflow-x-auto">
-                <button onclick="switchTab('overview')" id="tab-overview" class="tab-btn active-tab pb-4 text-sm font-bold border-b-2 transition-all">Team Progress Reports</button>
-                <button onclick="switchTab('roles')" id="tab-roles" class="tab-btn pb-4 text-sm font-bold border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all">Role Assignment</button>
+            <div class="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-sm">
+                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Scrutiny Team</p>
+                <h4 id="stat-scrutiny-count" class="text-3xl font-black text-blue-600 mt-1">0</h4>
             </div>
-
-            <div id="overview" class="tab-content active">
-                
-                <nav class="flex gap-2 p-1.5 bg-gray-100 rounded-2xl w-fit mb-8">
-                    <button onclick="showReport('scrutiny')" class="report-tab active px-6 py-2.5 rounded-xl text-xs font-bold transition-all" id="btn-scrutiny">Scrutiny Team</button>
-                    <button onclick="showReport('mom')" class="report-tab px-6 py-2.5 rounded-xl text-xs font-bold transition-all text-gray-500 hover:text-gray-900" id="btn-mom">MoM Team</button>
-                    <button onclick="showReport('proponent')" class="report-tab px-6 py-2.5 rounded-xl text-xs font-bold transition-all text-gray-500 hover:text-gray-900" id="btn-proponent">Project Proponents</button>
-                </nav>
-
-                <section id="report-scrutiny" class="report-section active">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                        <div class="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-sm">
-                            <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Pending Scrutiny</p>
-                            <h4 class="text-4xl font-black text-blue-600 mt-2">124</h4>
-                        </div>
-                        <div class="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-sm">
-                            <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Average TAT</p>
-                            <h4 class="text-4xl font-black text-gray-900 mt-2">4.2 Days</h4>
-                        </div>
-                        <div class="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-sm">
-                            <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest">EDS Raised</p>
-                            <h4 class="text-4xl font-black text-orange-500 mt-2">48</h4>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-[2rem] border border-gray-100 p-8">
-                        <h5 class="font-black text-gray-900 mb-4">Scrutiny Workflow Status</h5>
-                        <div class="w-full bg-gray-100 h-4 rounded-full overflow-hidden flex">
-                            <div class="bg-blue-500 h-full" style="width: 65%"></div>
-                            <div class="bg-orange-400 h-full" style="width: 20%"></div>
-                            <div class="bg-gray-300 h-full" style="width: 15%"></div>
-                        </div>
-                        <div class="flex gap-6 mt-4 text-[10px] font-bold uppercase">
-                            <span class="flex items-center gap-2"><span class="w-2 h-2 bg-blue-500 rounded-full"></span> Completed (65%)</span>
-                            <span class="flex items-center gap-2"><span class="w-2 h-2 bg-orange-400 rounded-full"></span> In Progress (20%)</span>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="report-mom" class="report-section">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                        <div class="bg-white p-8 rounded-[2.5rem] border border-gray-100">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <p class="text-[10px] font-black text-gray-400 uppercase">Minutes to be Finalized</p>
-                                    <h4 class="text-4xl font-black text-gray-900 mt-2">18</h4>
-                                </div>
-                                <i class="fa-solid fa-file-signature text-amber-500 text-2xl"></i>
-                            </div>
-                        </div>
-                        <div class="bg-white p-8 rounded-[2.5rem] border border-gray-100">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <p class="text-[10px] font-black text-gray-400 uppercase">Meetings Conducted (MTD)</p>
-                                    <h4 class="text-4xl font-black text-gray-900 mt-2">42</h4>
-                                </div>
-                                <i class="fa-solid fa-calendar-check text-emerald-500 text-2xl"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-[2rem] border border-gray-100 p-8 text-center py-12">
-                        <p class="text-gray-400 font-bold italic">Drafting performance is 12% higher than last quarter.</p>
-                    </div>
-                </section>
-
-                <section id="report-proponent" class="report-section">
-                    <div class="bg-white rounded-[2.5rem] border border-gray-100 p-8">
-                        <h5 class="font-black text-gray-900 mb-6 uppercase text-xs tracking-widest">Active Application Funnel</h5>
-                        <div class="space-y-6">
-                            <div class="space-y-2">
-                                <div class="flex justify-between text-xs font-bold"><span>Fresh Applications</span><span>892</span></div>
-                                <div class="w-full bg-gray-50 h-2 rounded-full"><div class="bg-red-600 h-full rounded-full" style="width: 90%"></div></div>
-                            </div>
-                            <div class="space-y-2">
-                                <div class="flex justify-between text-xs font-bold"><span>EDS Replied</span><span>241</span></div>
-                                <div class="w-full bg-gray-50 h-2 rounded-full"><div class="bg-emerald-500 h-full rounded-full" style="width: 45%"></div></div>
-                            </div>
-                            <div class="space-y-2">
-                                <div class="flex justify-between text-xs font-bold"><span>Awaiting Clarification</span><span>112</span></div>
-                                <div class="w-full bg-gray-50 h-2 rounded-full"><div class="bg-amber-400 h-full rounded-full" style="width: 25%"></div></div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+            <div class="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-sm">
+                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest">MoM Team</p>
+                <h4 id="stat-mom-count" class="text-3xl font-black text-amber-500 mt-1">0</h4>
             </div>
-
-            <div id="roles" class="tab-content">
-                <div class="bg-white rounded-[2.5rem] border border-gray-100 shadow-sm overflow-hidden">
-                    <div class="p-8 border-b border-gray-50 flex justify-between items-center">
-                        <h3 class="font-black text-gray-900 text-xl tracking-tight">User Role Management</h3>
-                        <button onclick="showAddUserPage()" class="bg-red-600 text-white px-8 py-3 rounded-2xl text-xs font-black uppercase tracking-widest shadow-xl shadow-red-100 hover:bg-red-700 transition transform active:scale-95">
-                            Add New User
-                        </button>
-                    </div>
-                    <table class="w-full text-left">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-8 py-4 text-[10px] font-black text-gray-400 uppercase">Unique ID</th>
-                                <th class="px-8 py-4 text-[10px] font-black text-gray-400 uppercase">User Name</th>
-                                <th class="px-8 py-4 text-[10px] font-black text-gray-400 uppercase">Current Role</th>
-                                <th class="px-8 py-4 text-[10px] font-black text-gray-400 uppercase">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody id="userTableBody" class="divide-y divide-gray-50"></tbody>
-                    </table>
-                </div>
+            <div class="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-sm">
+                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest">System Status</p>
+                <h4 class="text-xl font-black text-emerald-500 mt-3 flex items-center gap-2">
+                    <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span> ONLINE
+                </h4>
             </div>
         </div>
 
-        <div id="addUserPage" class="hidden max-w-3xl mx-auto">
-            </div>
+        <div class="flex gap-8 border-b border-gray-200 mb-8">
+            <button onclick="switchTab('users')" id="tab-users" class="tab-btn active-tab pb-4 text-sm font-bold transition-all">Team Management</button>
+            <button onclick="switchTab('logs')" id="tab-logs" class="tab-btn pb-4 text-sm font-bold text-gray-400 hover:text-gray-600 transition-all">System Logs</button>
+        </div>
 
+        <div id="users" class="tab-content active">
+            <div class="bg-white rounded-[2.5rem] border border-gray-100 shadow-xl shadow-slate-200/50 overflow-hidden">
+                <div class="p-8 border-b border-gray-50 flex justify-between items-center bg-gray-50/30">
+                    <div>
+                        <h3 class="font-black text-gray-900 text-xl tracking-tight">Active Role Assignments</h3>
+                        <p class="text-xs text-gray-400 font-medium mt-1">Manage personnel access levels and team positions.</p>
+                    </div>
+                    <button onclick="toggleModal(true)" class="bg-gray-900 text-white px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-red-600 transition shadow-lg">
+                        <i class="fa-solid fa-user-plus mr-2"></i> Provision New Role
+                    </button>
+                </div>
+                <table class="w-full text-left">
+                    <thead class="bg-gray-50/50">
+                        <tr>
+                            <th class="px-8 py-5 text-[10px] font-black text-gray-400 uppercase tracking-widest">Staff ID</th>
+                            <th class="px-8 py-5 text-[10px] font-black text-gray-400 uppercase tracking-widest">Name & Identity</th>
+                            <th class="px-8 py-5 text-[10px] font-black text-gray-400 uppercase tracking-widest">Role Details</th>
+                            <th class="px-8 py-5 text-[10px] font-black text-gray-400 uppercase tracking-widest text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userTableBody" class="divide-y divide-gray-50">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="logs" class="tab-content">
+            <div class="p-20 text-center bg-white rounded-[2.5rem] border border-dashed border-gray-200">
+                <i class="fa-solid fa-shield-halved text-gray-200 text-4xl mb-4"></i>
+                <p class="text-gray-400 font-bold uppercase text-[10px] tracking-widest">Audit Logs are encrypted and stored off-site.</p>
+            </div>
+        </div>
     </main>
 
+    <div id="userModal" class="hidden fixed inset-0 bg-slate-900/80 backdrop-blur-md z-[100] flex items-center justify-center p-4">
+        <div class="bg-white rounded-[3rem] max-w-md w-full p-10 shadow-2xl">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-black text-gray-900 tracking-tighter">New Provisioning</h3>
+                <button onclick="toggleModal(false)" class="text-gray-300 hover:text-red-500"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <form id="addUserForm" class="space-y-5">
+                <div>
+                    <label class="block text-[10px] font-black text-gray-400 uppercase mb-2 ml-1">Full Official Name</label>
+                    <input type="text" id="userName" required placeholder="e.g. Rahul Sharma" class="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-red-500 outline-none font-bold placeholder:text-gray-300">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-black text-gray-400 uppercase mb-2 ml-1">Strategic Role Assignment</label>
+                    <select id="userRole" class="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-red-500 outline-none font-bold">
+                        <option value="Scrutiny Team">Technical Scrutiny Team</option>
+                        <option value="MoM Team">EAC Minutes (MoM) Team</option>
+                        <option value="Admin">System Administrator</option>
+                    </select>
+                </div>
+                <div class="pt-4">
+                    <button type="submit" class="w-full bg-red-600 text-white py-5 rounded-2xl font-black uppercase text-xs tracking-widest shadow-xl shadow-red-100 hover:bg-red-700 transition active:scale-95">
+                        Confirm & Save Details
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
-        // Tab & Report View Logic
+        // Data Handling
+        let users = JSON.parse(localStorage.getItem('pariveshUsers')) || [
+            { id: "P3-ID-8821", name: "System Admin", role: "Admin", status: "Active" }
+        ];
+
         function switchTab(tabId) {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab', 'text-gray-900'));
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            
             document.getElementById('tab-' + tabId).classList.add('active-tab');
             document.getElementById(tabId).classList.add('active');
         }
 
-        function showReport(teamId) {
-            // Update Navbar Buttons
-            document.querySelectorAll('.report-tab').forEach(b => {
-                b.classList.remove('active', 'bg-slate-800', 'text-white');
-                b.classList.add('text-gray-500');
-            });
-            const activeBtn = document.getElementById('btn-' + teamId);
-            activeBtn.classList.add('active');
-            activeBtn.classList.remove('text-gray-500');
-
-            // Update Content Sections
-            document.querySelectorAll('.report-section').forEach(s => s.classList.remove('active'));
-            document.getElementById('report-' + teamId).classList.add('active');
+        function toggleModal(show) {
+            const modal = document.getElementById('userModal');
+            show ? modal.classList.remove('hidden') : modal.classList.add('hidden');
         }
-
-        // Add User Functions (from your previous code)
-        function showAddUserPage() {
-            document.getElementById('mainDashboard').classList.add('hidden');
-            document.getElementById('addUserPage').classList.remove('hidden');
-        }
-
-        function hideAddUserPage() {
-            document.getElementById('mainDashboard').classList.remove('hidden');
-            document.getElementById('addUserPage').classList.add('hidden');
-        }
-
-        // Initialize User Table
-        let users = JSON.parse(localStorage.getItem('pariveshUsers')) || [
-            { id: "P3-2026-0001", name: "Rahul Sharma", role: "Scrutiny Team", status: "Active" },
-            { id: "P3-2026-0002", name: "Anita V.", role: "MoM Team", status: "Active" }
-        ];
 
         function renderUsers() {
             const tbody = document.getElementById('userTableBody');
-            tbody.innerHTML = users.map(u => `
+            tbody.innerHTML = users.map((u, index) => `
                 <tr class="hover:bg-gray-50/50 transition">
-                    <td class="px-8 py-6 font-mono text-xs font-black text-red-600">${u.id}</td>
-                    <td class="px-8 py-6 font-bold text-gray-800">${u.name}</td>
+                    <td class="px-8 py-6 font-mono text-[10px] font-black text-red-600 uppercase tracking-tighter">${u.id}</td>
                     <td class="px-8 py-6">
-                        <span class="px-4 py-1.5 rounded-full text-[10px] font-black uppercase ${u.role.includes('Scrutiny') ? 'bg-blue-50 text-blue-600' : 'bg-amber-50 text-amber-600'}">
+                        <p class="font-bold text-gray-800">${u.name}</p>
+                        <p class="text-[10px] font-medium text-emerald-500 uppercase tracking-widest">Verified Account</p>
+                    </td>
+                    <td class="px-8 py-6">
+                        <span class="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest ${u.role === 'Admin' ? 'bg-slate-900 text-white' : (u.role.includes('Scrutiny') ? 'bg-blue-50 text-blue-600' : 'bg-amber-50 text-amber-600')}">
                             ${u.role}
                         </span>
                     </td>
-                    <td class="px-8 py-6 flex items-center gap-2">
-                        <span class="w-2 h-2 bg-emerald-500 rounded-full"></span>
-                        <span class="text-xs font-bold text-gray-600">${u.status}</span>
+                    <td class="px-8 py-6 text-right">
+                        <button onclick="removeUser(${index})" class="w-10 h-10 rounded-full hover:bg-red-50 text-gray-200 hover:text-red-500 transition">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
                     </td>
                 </tr>
             `).join('');
+            
+            updateStats();
+        }
+
+        function updateStats() {
+            document.getElementById('stat-total-users').innerText = users.length;
+            document.getElementById('stat-scrutiny-count').innerText = users.filter(u => u.role.includes('Scrutiny')).length;
+            document.getElementById('stat-mom-count').innerText = users.filter(u => u.role.includes('MoM')).length;
+        }
+
+        document.getElementById('addUserForm').onsubmit = (e) => {
+            e.preventDefault();
+            const newUser = {
+                id: "P3-ID-" + Math.floor(1000 + Math.random() * 9000),
+                name: document.getElementById('userName').value,
+                role: document.getElementById('userRole').value,
+                status: "Active"
+            };
+            
+            users.push(newUser);
+            localStorage.setItem('pariveshUsers', JSON.stringify(users));
+            renderUsers();
+            toggleModal(false);
+            e.target.reset();
+        };
+
+        function removeUser(index) {
+            if(confirm('Revoke access for this team member?')) {
+                users.splice(index, 1);
+                localStorage.setItem('pariveshUsers', JSON.stringify(users));
+                renderUsers();
+            }
         }
 
         window.onload = renderUsers;

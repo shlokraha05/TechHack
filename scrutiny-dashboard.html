@@ -61,8 +61,7 @@
                         <th class="px-8 py-5 text-[10px] font-black text-gray-400 uppercase tracking-widest">Action</th>
                     </tr>
                 </thead>
-                <tbody id="queue-body" class="divide-y divide-gray-50">
-                    </tbody>
+                <tbody id="queue-body" class="divide-y divide-gray-50"></tbody>
             </table>
             
             <div id="emptyState" class="hidden p-20 text-center">
@@ -76,7 +75,6 @@
 
     <div id="verifyModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
         <div class="bg-white rounded-[2.5rem] max-w-2xl w-full max-h-[90vh] overflow-hidden shadow-2xl flex flex-col">
-            
             <div class="p-8 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
                 <h3 id="modalTitle" class="text-xl font-black text-gray-900">Application Scrutiny</h3>
                 <button onclick="closeModal()" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-200 transition text-gray-400">
@@ -112,8 +110,7 @@
                 </div>
 
                 <div id="gistSection" class="hidden space-y-6">
-                    <div id="gistDisplay" class="p-8 border-2 border-dashed border-gray-200 rounded-3xl bg-gray-50 text-sm leading-relaxed text-gray-700">
-                        </div>
+                    <div id="gistDisplay" class="p-8 border-2 border-dashed border-gray-200 rounded-3xl bg-gray-50 text-sm leading-relaxed text-gray-700"></div>
                     <div class="flex gap-4 pt-6">
                         <button onclick="window.print()" class="px-6 py-4 font-bold text-blue-600 uppercase text-[10px] border border-blue-100 rounded-xl hover:bg-blue-50 transition">
                             <i class="fa-solid fa-print mr-2"></i> Print Gist
@@ -144,7 +141,13 @@
             let pending = 0;
             let processed = 0;
 
-            queue.forEach((app, index) => {
+            // REVERSE LOGIC: Create a reversed copy for display
+            const displayQueue = [...queue].reverse();
+
+            displayQueue.forEach((app, index) => {
+                // Map the display index back to the original localStorage index
+                const originalIndex = queue.length - 1 - index;
+
                 if (app.status === 'Pending Scrutiny') pending++;
                 else processed++;
 
@@ -167,7 +170,7 @@
                             </span>
                         </td>
                         <td class="px-8 py-6">
-                            <button onclick="openVerifyModal(${index})" class="bg-gray-900 text-white px-5 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-blue-600 transition shadow-lg shadow-gray-200">
+                            <button onclick="openVerifyModal(${originalIndex})" class="bg-gray-900 text-white px-5 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-blue-600 transition shadow-lg shadow-gray-200">
                                 ${app.status === 'Referred' ? 'View Details' : 'Verify & Gist'}
                             </button>
                         </td>
