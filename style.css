@@ -1,0 +1,75 @@
+/* Custom Animations and Overrides */
+
+body {
+    background: radial-gradient(circle at 50% 10%, #151829, #0f111a 60%);
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(99, 102, 241, 0.5);
+}
+
+/* Glass panel glow */
+.glass-glow {
+    position: relative;
+}
+
+.glass-glow::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(to bottom right, rgba(255,255,255,0.1), rgba(255,255,255,0));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+/* Tab Content Transitions */
+.tab-content {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Processing step animations */
+.step-item {
+    transition: all 0.3s ease;
+}
+
+.step-item.processing {
+    color: #8b5cf6;
+    animation: pulseText 1.5s infinite;
+}
+
+.step-item.success {
+    color: #10b981;
+}
+
+@keyframes pulseText {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; text-shadow: 0 0 10px rgba(139, 92, 246, 0.5); }
+    100% { opacity: 0.6; }
+}
+
+canvas {
+    outline: none;
+}

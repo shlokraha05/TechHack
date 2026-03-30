@@ -65,7 +65,7 @@
             </div>
             <div class="hidden md:flex items-center gap-8">
                 <a href="home.html" class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight nav-link">Home</a>
-                <a href="demo.html" class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight nav-link">Demo</a>
+                <a href="demo.html" class="text-violet-400 font-semibold border-b-2 border-violet-500 pb-1 font-['Space_Grotesk'] tracking-tight nav-link">Demo</a>
                 <a href="doc.html" class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight nav-link">Docs</a>
                 <a class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#">GitHub</a>
             </div>
@@ -75,73 +75,63 @@
         </div>
         <div class="bg-gradient-to-r from-violet-500/20 to-transparent h-[1px] w-full absolute bottom-0"></div>
     </nav>
-    <main class="flex-1 w-full relative pt-24 pb-12 px-8 flex flex-col max-w-[1600px] mx-auto min-h-[calc(100vh-4rem)] h-auto overflow-y-auto">
-        <div id="dashboardView" class="w-full h-full flex flex-col gap-8">
-            <header class="mb-4">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container/20 border border-secondary/20 text-secondary text-xs font-label tracking-widest uppercase mb-4">
-                    <span class="material-symbols-outlined text-[14px]">done_all</span> Engine Computed
-                </div>
-                <h1 class="text-4xl md:text-5xl font-headline font-bold text-on-surface tracking-tighter">
-                    Dashboard <span class="text-primary pr-2">Insight</span>
-                </h1>
-                <p class="text-on-surface-variant text-base mt-2">
-                    Review live 3D extraction and AI-driven structural recommendations against your blueprints.
-                </p>
-                <div class="flex gap-4 mt-8 border-b border-surface-container-highest">
-                    <button class="tab-btn text-white border-b-2 border-primary pb-2 px-4 font-headline uppercase tracking-wider text-sm transition-colors" data-target="tab-geometry">Geometry Check</button>
-                    <button class="tab-btn text-slate-500 border-b-2 border-transparent hover:text-slate-300 pb-2 px-4 font-headline uppercase tracking-wider text-sm transition-colors" data-target="tab-materials">Material Recommendations</button>
-                </div>
-            </header>
-            
-            <div id="tab-geometry" class="tab-content flex-grow flex flex-col lg:flex-row gap-6">
-                <div class="flex-1  glass-card rounded-2xl border border-surface-container-highest overflow-hidden flex flex-col relative h-[500px]">
-                    <div class="p-4 border-b border-surface-container-highest bg-[#1e1f29]/50 flex justify-between items-center z-10 shrink-0">
-                        <h3 class="font-headline font-semibold text-white tracking-tight flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">architecture</span> Floorplan Extraction Overlay</h3>
+    <main class="flex-1 w-full relative pt-16 flex flex-col min-h-[calc(100vh-4rem)] h-auto">
+
+        <div id="pipelineView" class="page-view relative z-30 flex-1 flex flex-col items-center justify-center p-8 md:p-16 w-full">
+            <h2 class="text-4xl font-bold text-white mb-2 font-headline">Architecture <span class="text-struct-cyan">Pipeline</span></h2>
+            <p class="text-slate-400 mb-12 text-center">Upload your technical floor plans. Our resolution AI engine<br/>reconstructs models and evaluates structural integrity in real-time.</p>
+
+            <div id="dropZone" class="w-full max-w-4xl border border-dashed border-struct-border hover:border-struct-cyan/50 bg-struct-surface rounded-2xl flex items-center justify-center cursor-pointer transition-colors relative min-h-[300px]">
+                <input type="file" id="fileInput" class="hidden" accept="image/png, image/jpeg, image/jpg">
+                <div class="flex flex-col items-center gap-4 pointer-events-none">
+                    <div class="w-12 h-12 rounded-full border border-struct-border flex items-center justify-center bg-struct-card">
+                        <i data-lucide="plus" class="w-5 h-5 text-struct-cyan"></i>
                     </div>
-                    <!-- 2D Canvas Target -->
-                    <div id="canvas2dContainer" class="flex-grow w-full relative bg-slate-900 border border-struct-border">
-                        <canvas id="view2d" class="absolute inset-0 w-full h-full"></canvas>
+                    <div class="text-center">
+                        <p class="text-white font-medium mb-1">Drop Floor Plans Here</p>
+                        <p class="text-xs text-slate-500">Supports PNG, JPG up to 10MB</p>
                     </div>
                 </div>
-                
-                <div class="flex-1 glass-card rounded-2xl border border-surface-container-highest overflow-hidden flex flex-col relative h-[500px]">
-                    <div class="p-4 border-b border-surface-container-highest bg-[#1e1f29]/50 flex justify-between items-center z-10 shrink-0">
-                        <h3 class="font-headline font-semibold text-white tracking-tight flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-sm">3d_rotation</span> Real-Time 3D Projection</h3>
-                    </div>
-                    <!-- 3D Canvas Target -->
-                    <div id="canvas3dContainer" class="flex-grow w-full relative bg-slate-900 outline-none"></div>
+                <div class="absolute bottom-6 flex gap-4 text-[10px] text-slate-500 font-mono">
+                    <span>SUPPORTED TYPES: PNG, JPG</span>
+                    <span>MAX UPLOAD SIZE: 10MB</span>
                 </div>
             </div>
 
-            <div id="tab-materials" class="tab-content hidden flex-grow grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div>
-                     <div class="flex items-center gap-3 mb-6">
-                         <span class="material-symbols-outlined text-primary text-2xl">hardware</span>
-                         <h3 class="text-2xl font-headline font-bold text-white">Recommended Resources</h3>
-                     </div>
-                     <p class="text-slate-400 text-sm mb-6">Structural segment allocations sorted by optimal load bearing vs cost efficiencies.</p>
-                     
-                     <!-- Materials AI Target -->
-                     <div id="materialsList" class="flex flex-col gap-4">
-                         <!-- Dynamically populated by app.js -->
-                     </div>
-                     <button onclick="window.location.href='cost.html'" class="mt-8 px-6 py-3 w-full bg-surface-container-high hover:bg-surface-container-highest border border-surface-container-highest text-white font-headline rounded-xl transition-colors shadow-lg flex items-center justify-center gap-2"><span class="material-symbols-outlined text-secondary text-sm">payments</span> Push Requirements To Cost Engine</button>
+            <!-- Pipeline UI (Hidden until file uploaded) -->
+            <div id="pipelineContainer" class="hidden w-full max-w-4xl mt-12">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-sm font-semibold text-struct-cyan tracking-widest uppercase">Processing Pipeline</h3>
+                    <span id="pipelineStatusText" class="text-xs font-mono text-struct-accent animate-pulse">LIVE PARSING ONGOING...</span>
                 </div>
-                <div>
-                     <div class="flex items-center gap-3 mb-6">
-                         <span class="material-symbols-outlined text-secondary text-2xl">psychology</span>
-                         <h3 class="text-2xl font-headline font-bold text-white">Neural Reasoning</h3>
+                <div class="grid grid-cols-5 gap-3 mb-8" id="pipelineSteps"></div>
+                <div class="bg-struct-surface border border-struct-border rounded-xl p-5 flex items-center justify-between">
+                     <div>
+                         <p class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider mb-2">Current Asset</p>
+                         <div class="flex items-center gap-4">
+                             <div class="w-10 h-10 bg-struct-bg border border-struct-border rounded flex items-center justify-center">
+                                 <i data-lucide="image" class="w-5 h-5 text-slate-400"></i>
+                             </div>
+                             <div>
+                                 <p class="text-sm font-medium text-white" id="assetName">floorplan.png</p>
+                                 <p class="text-xs text-struct-cyan mt-0.5">Uploaded & Processing...</p>
+                             </div>
+                         </div>
                      </div>
-                     <div class="glass-card rounded-2xl p-8 border border-surface-container-highest overflow-y-auto">
-                        <!-- Explanations Target -->
-                        <div id="explanationsList" class="flex flex-col gap-4">
-                            <!-- Dynamically populated by app.js -->
-                        </div>
+                     <div class="text-right flex items-center gap-6">
+                         <div>
+                             <p class="text-[10px] text-slate-500 uppercase mb-1">Pipe Run State</p>
+                             <p class="text-xs text-white" id="pipelineProgress">0%</p>
+                         </div>
+                         <button id="viewResultsBtn" class="hidden bg-struct-border text-white text-xs px-4 py-2 rounded hover:bg-struct-cyan hover:text-black transition-colors">
+                             VIEW RESULTS
+                         </button>
                      </div>
                 </div>
+                <div id="serverErrorBox" class="hidden mt-4 bg-struct-danger/10 border border-struct-danger/20 text-struct-danger p-3 rounded text-xs break-all"></div>
             </div>
-
         </div>
+
     </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>

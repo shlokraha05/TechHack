@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechHack - Autonomous Intel for Construction</title>
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="stylesheet" href="style.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: { 
+                "headline": ["Space Grotesk"],
+                "body": ["Inter"],
+                "label": ["Inter"],
+                sans: ['Inter', 'sans-serif']
+            },
+            colors: {
+              struct: {
+                bg: '#0a0a0c', surface: '#121216', card: '#16161b', border: '#2c2d33',
+                accent: '#E024CE', accentHover: '#c11eb0', cyan: '#00E5FF', danger: '#ff4b4b'
+              },
+              "primary-container": "#a078ff", "tertiary-container": "#8987df", "outline": "#958ea0",
+              "on-secondary-fixed": "#001f26", "error": "#ffb4ab", "tertiary": "#c3c0ff",
+              "surface-container-lowest": "#0a0e17", "on-secondary-container": "#00424e",
+              "on-tertiary-container": "#201b70", "tertiary-fixed": "#e2dfff",
+              "on-tertiary-fixed-variant": "#3e3c8f", "on-background": "#dfe2ef",
+              "secondary-fixed-dim": "#4cd7f6", "on-error-container": "#ffdad6", "surface": "#0f131c",
+              "error-container": "#93000a", "on-primary-fixed-variant": "#5516be", "background": "#0f131c",
+              "on-primary-fixed": "#23005c", "on-tertiary": "#272377", "on-surface": "#dfe2ef",
+              "on-secondary": "#003640", "on-primary-container": "#340080", "on-surface-variant": "#cbc3d7",
+              "surface-variant": "#31353f", "primary-fixed": "#e9ddff", "on-primary": "#3c0091",
+              "surface-bright": "#353943", "primary": "#d0bcff", "primary-fixed-dim": "#d0bcff",
+              "surface-container-low": "#181b25", "secondary-container": "#03b5d3", "secondary": "#4cd7f6",
+              "outline-variant": "#494454", "inverse-on-surface": "#2c303a", "inverse-primary": "#6d3bd7",
+              "on-error": "#690005", "on-tertiary-fixed": "#100563", "surface-container-highest": "#31353f",
+              "surface-container-high": "#262a34", "on-secondary-fixed-variant": "#004e5c",
+              "surface-dim": "#0f131c", "inverse-surface": "#dfe2ef", "surface-tint": "#d0bcff",
+              "secondary-fixed": "#acedff", "tertiary-fixed-dim": "#c3c0ff", "surface-container": "#1c1f29"
+            },
+            borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }
+          }
+        }
+      }
+    </script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-card { background: rgba(49, 53, 63, 0.4); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+        .hero-grid { background-image: linear-gradient(to right, #494454 1px, transparent 1px), linear-gradient(to bottom, #494454 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse at center, black, transparent 80%); }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30 selection:text-primary min-h-screen flex flex-col overflow-x-hidden relative w-full">
+    <nav class="fixed top-0 w-full z-50 bg-slate-950/40 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(139,92,246,0.06)] h-16 shrink-0">
+        <div class="max-w-screen-2xl mx-auto flex justify-between items-center px-8 h-full">
+            <div class="text-xl font-bold tracking-tighter text-slate-50 font-['Space_Grotesk'] cursor-pointer" onclick="window.location.href='home.html'">
+                TechHack
+            </div>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="home.html" class="text-violet-400 font-semibold border-b-2 border-violet-500 pb-1 font-['Space_Grotesk'] tracking-tight nav-link">Home</a>
+                <a href="demo.html" class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight nav-link">Demo</a>
+                <a href="doc.html" class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight nav-link">Docs</a>
+                <a class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#">GitHub</a>
+            </div>
+            <button class="bg-gradient-to-r from-primary to-primary-container text-on-primary-container px-6 py-2 rounded-xl text-sm font-semibold hover:scale-95 duration-150 transition-all nav-link" onclick="window.location.href='demo.html'">
+                Upload Plan
+            </button>
+        </div>
+        <div class="bg-gradient-to-r from-violet-500/20 to-transparent h-[1px] w-full absolute bottom-0"></div>
+    </nav>
+    <main class="flex-1 w-full relative pt-16 flex flex-col min-h-[calc(100vh-4rem)] h-auto overflow-y-auto">
+
+        <div id="landingView" class="page-view relative z-40 bg-background flex flex-col w-full">
+            <!-- Hero Section -->
+            <section class="relative min-h-[calc(100vh-4rem)] flex items-center justify-center -mt-16 overflow-hidden">
+                <div class="absolute inset-0 z-0 opacity-20 hero-grid"></div>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[120px] z-0"></div>
+                <div class="relative z-10 max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+                    <div class="lg:col-span-7 space-y-8">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container/20 border border-secondary/20 text-secondary text-xs font-label tracking-widest uppercase">
+                            <span class="material-symbols-outlined text-[14px]">auto_awesome</span> Autonomous Engineering Engine
+                        </div>
+                        <h1 class="text-6xl md:text-8xl font-headline font-bold leading-[1.1] tracking-tight text-on-surface">
+                            Turn Floor Plans into <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-primary-container">Intelligent</span> Structures
+                        </h1>
+                        <p class="text-xl md:text-2xl text-on-surface-variant max-w-2xl font-light leading-relaxed">
+                            Upload a floor plan. Get 3D models, material insights, and engineering decisions in seconds. Built for the modern architect.
+                        </p>
+                        <div class="flex flex-wrap gap-6 pt-4">
+                            <button onclick="window.location.href='demo.html'" class="px-8 py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary-container font-headline font-bold rounded-xl shadow-[0_0_20px_rgba(208,188,255,0.3)] hover:scale-105 transition-transform duration-300">
+                                Upload Floor Plan
+                            </button>
+                            <button onclick="window.location.href='demo.html'" class="px-8 py-4 bg-transparent border border-outline-variant text-on-surface font-headline font-bold rounded-xl hover:bg-surface-container-high transition-colors">
+                                View Demo
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Visual Element -->
+                    <div class="lg:col-span-5 relative hidden lg:block">
+                        <div class="glass-card rounded-2xl border border-outline-variant/10 p-4 shadow-2xl rotate-2">
+                            <img alt="3D Architectural Visualization" class="rounded-lg w-full h-[400px] object-cover opacity-80 mix-blend-lighten" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBr87eIJK_Prc85N8OytxidPnXDSrcMeJCGdtseBM9TmDcmbF9BNFdXRH0rRIOPHNi2j8t7mw1Trfwt7PftAZPFinniZiOpmTiTS4sjX4OfXB158E7C9izAmNpzigPevgpwagkrB3QSseTPZ82mjMCFDSSpLqz6qBl4QFn9kLo9Tj_yvLdBwA28xaBpWkohZHynNjNuBPP14uwU7mgoWlVTbkpSTqHgQgglsmUjGCkcgVGz4EXfgZRhRVeGISnocbMMvsovmLJvicE" />
+                            <div class="absolute -top-6 -right-6 glass-card px-4 py-3 rounded-xl border border-secondary/30 shadow-lg">
+                                <div class="flex items-center gap-3"><span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">psychology</span><div><p class="text-[10px] text-on-surface-variant uppercase tracking-widest font-label">AI Logic</p><p class="text-sm font-headline font-bold">Optimized Load Path</p></div></div>
+                            </div>
+                            <div class="absolute top-1/2 -left-12 glass-card px-4 py-3 rounded-xl border border-primary/30 shadow-lg">
+                                <div class="flex items-center gap-3"><span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">architecture</span><div><p class="text-[10px] text-on-surface-variant uppercase tracking-widest font-label">Precision</p><p class="text-sm font-headline font-bold">0.02mm Tolerance</p></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Bento Grid Features -->
+            <section class="py-24 bg-surface-container-lowest relative">
+                <div class="max-w-7xl mx-auto px-8">
+                    <div class="mb-16"><h2 class="text-4xl font-headline font-bold text-on-surface mb-4">Core Intelligence</h2><p class="text-on-surface-variant max-w-xl">StructAI processes complex spatial data through three distinct analytical layers.</p></div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="md:col-span-2 bg-surface-container-high rounded-2xl p-8 relative overflow-hidden group">
+                            <div class="relative z-10 flex flex-col h-full">
+                                <span class="material-symbols-outlined text-secondary text-4xl mb-6">view_in_ar</span><h3 class="text-2xl font-headline font-bold mb-4">Automated BIM Creation</h3><p class="text-on-surface-variant mb-8 max-w-md">Transform static 2D images into rich, data-embedded 3D Building Information Models instantly.</p>
+                                <div class="mt-auto"><div class="flex items-center gap-2 text-secondary font-label text-sm uppercase tracking-widest">Explore BIM Engine <span class="material-symbols-outlined text-sm">arrow_forward</span></div></div>
+                            </div>
+                            <img class="absolute right-0 bottom-0 w-1/2 h-full object-cover opacity-10 group-hover:opacity-20 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQu1vlYLGYa5Sahmf4bo8R1goB4_X8SaAPs5dX6RfNPtWPzHmvogtzmMqxvIx2Shdttz7QrAxhpKFic6oWTwXY-HW0vWvb48KmIftEDTPFavEBxdbDfFuGQhXJeP_kxANKFyM4H2_XPHRnARKrZiKkPpPqlrF4ZM5kfsw2n1lTFAkGSnakkoOxdXzhsy0czwFIVQ1R_nt0SSAtR0GnRjSZej4TcZW32LsadvVerF03sR8NlJUYRKNkipcCGXGnsqbwmm8zIT1Rugw" />
+                        </div>
+                        <div class="bg-surface-container-high rounded-2xl p-8 group">
+                            <span class="material-symbols-outlined text-primary text-4xl mb-6">payments</span><h3 class="text-2xl font-headline font-bold mb-4">Cost Dynamics</h3><p class="text-on-surface-variant mb-6">Real-time material market analysis synced with your specific floor plan dimensions.</p>
+                            <div class="h-24 w-full bg-surface-container-lowest rounded-lg border border-outline-variant/10 flex items-center justify-center"><div class="flex items-baseline gap-1"><span class="text-3xl font-headline font-bold text-primary">Rs 42.8L</span><span class="text-xs text-on-surface-variant">Est. Materials</span></div></div>
+                        </div>
+                        <div class="bg-surface-container-high rounded-2xl p-8">
+                            <span class="material-symbols-outlined text-tertiary text-4xl mb-6">verified_user</span><h3 class="text-2xl font-headline font-bold mb-4">Code Compliance</h3><p class="text-on-surface-variant">Autonomous verification against regional building codes and safety regulations.</p>
+                        </div>
+                        <div class="md:col-span-2 bg-gradient-to-br from-surface-container-high to-primary/5 rounded-2xl p-8 flex flex-col md:flex-row gap-8 items-center border border-primary/5">
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-headline font-bold mb-4">Sustainability Matrix</h3><p class="text-on-surface-variant">Calculate carbon footprint impact based on selected materials and structural efficiency.</p>
+                            </div>
+                            <div class="flex-none bg-surface-container-highest p-6 rounded-full border border-outline-variant/20"><div class="w-16 h-16 rounded-full border-4 border-secondary border-t-transparent animate-spin-slow"></div><div class="absolute inset-0 flex items-center justify-center"><span class="text-secondary font-headline font-bold">94%</span></div></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- CTA Section -->
+            <section class="py-32 px-8">
+                <div class="max-w-4xl mx-auto text-center glass-card p-16 rounded-[2rem] border border-outline-variant/10 relative overflow-hidden">
+                    <div class="absolute -top-24 -left-24 w-64 h-64 bg-primary/20 rounded-full blur-[100px]"></div>
+                    <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-secondary/20 rounded-full blur-[100px]"></div>
+                    <h2 class="text-4xl md:text-5xl font-headline font-bold mb-6 relative z-10">Ready to build smarter?</h2>
+                    <p class="text-xl text-on-surface-variant mb-10 relative z-10">Join 500+ architecture firms using TechHack to automate the tedious and focus on the visionary.</p>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4 relative z-10">
+                        <button class="px-10 py-5 bg-on-surface text-surface font-headline font-bold rounded-xl hover:bg-primary transition-colors" onclick="window.location.href='demo.html'">Get Started Now</button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Footer -->
+            <footer class="w-full py-12 border-t border-slate-900 bg-slate-950 mt-auto">
+                <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center px-8 font-['Inter'] text-xs text-slate-500">
+                    <div class="flex flex-col items-center md:items-start gap-2 mb-8 md:mb-0">
+                        <span class="text-slate-300 font-medium">© TechHack • Kinetic Architect Systems</span>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </main>
+</body>
+</html>

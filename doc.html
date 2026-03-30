@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>TechHack | Detailed Analysis</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary-container": "#a078ff",
+                        "tertiary-container": "#8987df",
+                        "outline": "#958ea0",
+                        "on-secondary-fixed": "#001f26",
+                        "error": "#ffb4ab",
+                        "tertiary": "#c3c0ff",
+                        "surface-container-lowest": "#0a0e17",
+                        "on-secondary-container": "#00424e",
+                        "on-tertiary-container": "#201b70",
+                        "tertiary-fixed": "#e2dfff",
+                        "on-tertiary-fixed-variant": "#3e3c8f",
+                        "on-background": "#dfe2ef",
+                        "secondary-fixed-dim": "#4cd7f6",
+                        "on-error-container": "#ffdad6",
+                        "surface": "#0f131c",
+                        "error-container": "#93000a",
+                        "on-primary-fixed-variant": "#5516be",
+                        "background": "#0f131c",
+                        "on-primary-fixed": "#23005c",
+                        "on-tertiary": "#272377",
+                        "on-surface": "#dfe2ef",
+                        "on-secondary": "#003640",
+                        "on-primary-container": "#340080",
+                        "on-surface-variant": "#cbc3d7",
+                        "surface-variant": "#31353f",
+                        "primary-fixed": "#e9ddff",
+                        "on-primary": "#3c0091",
+                        "surface-bright": "#353943",
+                        "primary": "#d0bcff",
+                        "primary-fixed-dim": "#d0bcff",
+                        "surface-container-low": "#181b25",
+                        "secondary-container": "#03b5d3",
+                        "secondary": "#4cd7f6",
+                        "outline-variant": "#494454",
+                        "inverse-on-surface": "#2c303a",
+                        "inverse-primary": "#6d3bd7",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed": "#100563",
+                        "surface-container-highest": "#31353f",
+                        "surface-container-high": "#262a34",
+                        "on-secondary-fixed-variant": "#004e5c",
+                        "surface-dim": "#0f131c",
+                        "inverse-surface": "#dfe2ef",
+                        "surface-tint": "#d0bcff",
+                        "secondary-fixed": "#acedff",
+                        "tertiary-fixed-dim": "#c3c0ff",
+                        "surface-container": "#1c1f29"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .glass-panel {
+            background: rgba(49, 53, 63, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .kinetic-border {
+            background: linear-gradient(135deg, #d0bcff 0%, transparent 100%);
+            padding: 1px;
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-surface font-body selection:bg-primary/30">
+    <!-- TopNavBar -->
+    <nav class="fixed top-0 w-full z-50 bg-slate-950/40 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(139,92,246,0.06)]">
+        <div class="flex justify-between items-center px-8 py-4 max-w-screen-2xl mx-auto relative">
+            <div class="text-xl font-bold tracking-tighter text-slate-50 font-['Space_Grotesk']" onclick="window.location.href='home.html'" style="cursor: pointer;">TechHack</div>
+            <div class="hidden md:flex items-center gap-8 font-['Space_Grotesk'] tracking-tight">
+                <a class="text-slate-400 hover:text-slate-200 transition-colors" href="home.html">Home</a>
+                <a class="text-slate-400 hover:text-slate-200 transition-colors" href="demo.html">Demo</a>
+                <a class="text-violet-400 font-semibold border-b-2 border-violet-500 pb-1" href="doc.html">Docs</a>
+                <a class="text-slate-400 hover:text-slate-200 transition-colors" href="#">GitHub</a>
+            </div>
+            <button onclick="window.location.href='demo.html'"
+                class="bg-gradient-to-br from-primary to-primary-container text-on-primary-container px-5 py-2 rounded-xl font-semibold text-sm transition-all active:scale-95 duration-150">
+                Upload Plan
+            </button>
+            <div class="bg-gradient-to-r from-violet-500/20 to-transparent h-[1px] w-full absolute bottom-0 left-0">
+            </div>
+        </div>
+    </nav>
+    <!-- SideNavBar (Desktop Only) -->
+    <aside
+        class="hidden lg:flex h-screen w-64 fixed left-0 top-0 flex-col py-8 bg-slate-950/60 backdrop-blur-2xl border-r border-slate-800/50 z-40">
+        <div class="px-8 mb-12 mt-16">
+            <div class="text-lg font-black text-violet-500 font-['Space_Grotesk'] uppercase tracking-widest">TechHack
+            </div>
+            <div class="text-[10px] text-slate-500 font-['Space_Grotesk'] tracking-[0.2em] mt-1">AUTONOMOUS INTEL</div>
+        </div>
+        <nav class="flex flex-col gap-1">
+            <a class="bg-slate-800/80 text-cyan-400 border-l-2 border-cyan-400 px-8 py-4 flex items-center gap-3 font-['Space_Grotesk'] text-sm uppercase tracking-widest hover:translate-x-1 duration-200"
+                href="#">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">architecture</span>
+                Materials
+            </a>
+            <a class="text-slate-500 px-8 py-4 flex items-center gap-3 hover:text-slate-300 font-['Space_Grotesk'] text-sm uppercase tracking-widest hover:bg-slate-900/40 transition-all hover:translate-x-1 duration-200"
+                href="cost.html">
+                <span class="material-symbols-outlined">payments</span>
+                Cost Analysis
+            </a>
+            <a class="text-slate-500 px-8 py-4 flex items-center gap-3 hover:text-slate-300 font-['Space_Grotesk'] text-sm uppercase tracking-widest hover:bg-slate-900/40 transition-all hover:translate-x-1 duration-200"
+                href="#">
+                <span class="material-symbols-outlined">psychology</span>
+                Explanation
+            </a>
+        </nav>
+    </aside>
+    <!-- Main Content Canvas -->
+    <main class="lg:ml-64 pt-24 pb-12 px-6 md:px-12 max-w-7xl">
+        <!-- Header Section -->
+        <header class="mb-16 flex flex-col md:flex-row justify-between items-end gap-6">
+            <div class="max-w-2xl">
+                <h1 class="text-5xl md:text-6xl font-headline font-bold text-on-surface tracking-tighter mb-4">
+                    Structural <span class="text-primary">Intelligence</span> Analysis
+                </h1>
+                <p class="text-on-surface-variant text-lg leading-relaxed">
+                    Reviewing structural integrity and material selection for <span
+                        class="text-on-surface font-medium">Zone A-04: Load Bearing Partition</span>.
+                </p>
+            </div>
+            <div class="flex gap-4">
+                <div class="glass-panel px-6 py-4 rounded-xl border-t border-white/10">
+                    <div class="text-label text-[10px] text-secondary font-bold tracking-[0.2em] uppercase mb-1">Status
+                    </div>
+                    <div class="text-xl font-headline font-bold text-on-surface">OPTIMIZED</div>
+                </div>
+            </div>
+        </header>
+        <!-- Bento Grid Analysis -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+            <!-- Cost vs Strength Visualization Card -->
+            <div class="md:col-span-8 glass-panel rounded-2xl p-8 relative overflow-hidden flex flex-col min-h-[400px]">
+                <div class="flex justify-between items-start mb-12">
+                    <div>
+                        <h3 class="text-xl font-headline font-bold text-on-surface mb-1">Cost vs. Strength Spectrum</h3>
+                        <p class="text-on-surface-variant text-sm">Real-time trade-off mapping based on regional supply
+                            indices.</p>
+                    </div>
+                    <span class="material-symbols-outlined text-primary text-3xl">insights</span>
+                </div>
+                <!-- Custom Graph Visualization -->
+                <div class="flex-grow flex items-end justify-between gap-2 relative px-4">
+                    <!-- Y-Axis Label -->
+                    <div class="absolute -left-4 top-1/2 -rotate-90 text-[10px] uppercase tracking-widest text-outline">
+                        Structural Integrity</div>
+                    <!-- Graph Bars -->
+                    <div class="w-full h-48 flex items-end justify-between gap-4">
+                        <div
+                            class="flex-1 bg-surface-container-highest/40 rounded-t-lg h-[40%] transition-all hover:bg-surface-container-highest group relative">
+                            <div
+                                class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity text-[10px] text-outline">
+                                Timber</div>
+                        </div>
+                        <div
+                            class="flex-1 bg-surface-container-highest/40 rounded-t-lg h-[60%] transition-all hover:bg-surface-container-highest group relative">
+                            <div
+                                class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity text-[10px] text-outline">
+                                Cinder</div>
+                        </div>
+                        <!-- Chosen Material Highlight -->
+                        <div
+                            class="flex-1 bg-gradient-to-t from-primary/80 to-primary-container rounded-t-lg h-[75%] relative shadow-[0_0_40px_rgba(208,188,255,0.2)]">
+                            <div class="absolute -top-12 left-1/2 -translate-x-1/2 flex flex-col items-center">
+                                <span
+                                    class="bg-primary text-on-primary px-2 py-1 rounded text-[10px] font-bold">OPTIMAL</span>
+                                <div class="w-[1px] h-4 bg-primary/50 mt-1"></div>
+                            </div>
+                            <div
+                                class="absolute bottom-[-32px] left-1/2 -translate-x-1/2 text-primary font-bold text-[10px] whitespace-nowrap">
+                                RED BRICK</div>
+                        </div>
+                        <div
+                            class="flex-1 bg-surface-container-highest/40 rounded-t-lg h-[85%] transition-all hover:bg-surface-container-highest group relative">
+                            <div
+                                class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity text-[10px] text-outline">
+                                Steel</div>
+                        </div>
+                        <div
+                            class="flex-1 bg-surface-container-highest/40 rounded-t-lg h-[95%] transition-all hover:bg-surface-container-highest group relative">
+                            <div
+                                class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity text-[10px] text-outline">
+                                Concrete</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-16 flex justify-between border-t border-outline-variant/20 pt-6">
+                    <div class="flex gap-8">
+                        <div>
+                            <div class="text-[10px] text-outline uppercase tracking-widest mb-1">Efficiency</div>
+                            <div class="text-xl font-headline font-bold">94.2%</div>
+                        </div>
+                        <div>
+                            <div class="text-[10px] text-outline uppercase tracking-widest mb-1">Estimated Cost</div>
+                            <div class="text-xl font-headline font-bold text-secondary">Rs1,240<span
+                                    class="text-sm font-normal text-outline"> / unit</span></div>
+                        </div>
+                    </div>
+                    <a href="materials.html"><button
+                        class="text-secondary text-sm font-bold flex items-center gap-2 hover:opacity-80 transition-opacity">
+                        View Full Dataset <span class="material-symbols-outlined text-sm">arrow_forward</span>
+        
+                    </button></a>
+                </div>
+            </div>
+            <!-- AI Explanation Panel -->
+            <div class="md:col-span-4 flex flex-col gap-6">
+                <!-- Main Insight -->
+                <div class="glass-panel rounded-2xl p-6 border-l-4 border-primary">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-primary text-sm"
+                                style="font-variation-settings: 'FILL' 1;">psychology</span>
+                        </div>
+                        <span class="text-xs font-bold tracking-widest text-primary uppercase">AI Reasoning</span>
+                    </div>
+                    <p class="text-on-surface leading-relaxed text-sm mb-4">
+                        "This wall spans <span class="text-secondary font-medium">4.2m</span>, requiring high
+                        compressive strength. <span class="text-primary font-medium">Red brick</span> is selected due to
+                        its balance of cost and durability."
+                    </p>
+                    <div class="bg-surface-container-lowest/50 p-3 rounded-lg flex items-center gap-3">
+                        <span class="material-symbols-outlined text-secondary">verified</span>
+                        <span class="text-[11px] text-on-surface-variant italic">Confidence score: 98.4% base on local
+                            building codes.</span>
+                    </div>
+                </div>
+                <!-- Secondary Data Points -->
+                <div class="bg-surface-container-low rounded-2xl p-6 flex flex-col gap-4">
+                    <div class="flex justify-between items-center pb-4 border-b border-outline-variant/10">
+                        <span class="text-on-surface-variant text-sm">Elastic Modulus</span>
+                        <span class="font-headline font-bold">14.5 GPa</span>
+                    </div>
+                    <div class="flex justify-between items-center pb-4 border-b border-outline-variant/10">
+                        <span class="text-on-surface-variant text-sm">Thermal Mass</span>
+                        <span class="font-headline font-bold text-secondary">High</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-on-surface-variant text-sm">C02 Footprint</span>
+                        <span class="font-headline font-bold text-error">Moderate</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Material Detail Card -->
+            <div class="md:col-span-12 glass-panel rounded-2xl overflow-hidden grid grid-cols-1 md:grid-cols-3">
+                <div class="relative h-64 md:h-full">
+                    <img class="w-full h-full object-cover"
+                        data-alt="close up macro shot of high quality red architectural bricks with clean mortar lines and professional lighting"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDebTt7JrhcQkBAYn5sHi1RtskCs3knGuQJpCvIa1zf794WDLk9kyqfJaVm8HHtmL4B8EWeS0L7AxyPoVvxHeXN66vejyAUbot0P3Q3iWzS9lpCS-8eIXQu76gbbMP3neVjxx-s0vOhk7NRygicR2wte3CFXI4qycMmyoP_PrmLyhntuqGXW7aRfuQlBLpWOwk-Sx8Uiyk9pUsXjg2cJ2uF4PdOBWV56G_DKTyYXZ8QjmILOM2UBxENk4Fa8inEgJjFz0kCzgzI-xc" />
+                    <div class="absolute inset-0 bg-gradient-to-r from-surface/80 to-transparent"></div>
+                </div>
+                <div class="md:col-span-2 p-8 flex flex-col justify-center">
+                    <div class="flex items-center gap-4 mb-4">
+                        <h2 class="text-3xl font-headline font-bold">Standard Red Brick (Grade A)</h2>
+                        <span
+                            class="px-3 py-1 rounded-full bg-secondary-container/20 text-secondary text-[10px] font-bold uppercase tracking-widest border border-secondary/30">Insight
+                            Chip</span>
+                    </div>
+                    <p class="text-on-surface-variant mb-8 max-w-xl">
+                        Locally sourced recycled clay variant selected to minimize logistics overhead. Meets ASTM C62
+                        structural requirements for weather-exposed masonry components.
+                    </p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        <div class="space-y-1">
+                            <div class="text-[10px] text-outline uppercase tracking-widest">Weight</div>
+                            <div class="font-bold">2.3 kg/unit</div>
+                        </div>
+                        <div class="space-y-1">
+                            <div class="text-[10px] text-outline uppercase tracking-widest">Fire Rating</div>
+                            <div class="font-bold text-secondary">4 Hours</div>
+                        </div>
+                        <div class="space-y-1">
+                            <div class="text-[10px] text-outline uppercase tracking-widest">Porosity</div>
+                            <div class="font-bold">12% avg</div>
+                        </div>
+                        <div class="space-y-1">
+                            <div class="text-[10px] text-outline uppercase tracking-widest">Durability</div>
+                            <div class="font-bold">100+ Years</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="w-full py-12 border-t border-slate-900 bg-slate-950 mt-12">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center px-8 gap-6">
+            <div class="font-['Inter'] text-xs text-slate-500">
+                © TechHack • Kinetic Architect Systems
+            </div>
+            <div class="flex gap-8">
+                <a class="text-slate-600 hover:text-cyan-400 transition-colors font-['Inter'] text-xs"
+                    href="#">Privacy</a>
+                <a class="text-slate-600 hover:text-cyan-400 transition-colors font-['Inter'] text-xs"
+                    href="#">Terms</a>
+                <a class="text-slate-600 hover:text-cyan-400 transition-colors font-['Inter'] text-xs"
+                    href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
